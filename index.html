@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zizhe Wang | 个人博客</title>
+    <meta
+      name="description"
+      content="Zizhe Wang 的个人博客，记录创业思考与生活观察。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-shape shape-a"></div>
+    <div class="background-shape shape-b"></div>
+
+    <header class="site-header">
+      <nav class="nav">
+        <div class="nav-right">
+          <div class="lang-switch" aria-label="Language switcher">
+            <button class="lang-btn is-active" data-lang="zh" type="button">中</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <h1 data-i18n="heroTitle">欢迎来到我的博客</h1>
+        <p class="hero-text" data-i18n="heroText">
+          这里分享我在技术、产品、创业与生活中的思考与实践。
+        </p>
+      </section>
+    </header>
+
+    <main>
+      <section id="posts" class="section">
+        <div class="post-grid">
+          <article class="post-card">
+            <p class="meta" data-i18n="post0Meta">2026-02-21</p>
+            <h3 data-i18n="post0Title">一周总结</h3>
+            <p data-i18n="post0Summary">
+              永远不要因为有人做过就放弃，机会常在细分需求。想法不稀缺，执行才稀缺；LLM 到 Agent 之间仍有巨大系统工程鸿沟。
+            </p>
+            <a id="post0Link" href="posts/2026-02-21-weekly-summary.html" data-i18n="readMore">继续阅读</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p data-i18n="footerText">© 2026 Zizhe Wang.</p>
+    </footer>
+
+    <script>
+      const uiI18n = {
+        zh: {
+          pageTitle: "Zizhe Wang | 个人博客",
+          pageDescription: "Zizhe Wang 的个人博客，记录创业思考与生活观察。",
+          heroTitle: "欢迎来到我的博客",
+          heroText: "这里分享我在技术、产品、创业与生活中的思考与实践。",
+          readMore: "继续阅读",
+          footerText: "© 2026 Zizhe Wang."
+        },
+        en: {
+          pageTitle: "Zizhe Wang | Personal Blog",
+          pageDescription:
+            "Zizhe Wang’s personal blog on startup insights and reflections on life.",
+          heroTitle: "Welcome to My Blog",
+          heroText:
+            "I share my thoughts and practice in technology, product, my startup journey, and life.",
+          readMore: "Read More",
+          footerText: "© 2026 Zizhe Wang."
+        }
+      };
+
+      const postsI18n = {
+        zh: {
+          post0Meta: "2026-02-21",
+          post0Title: "一周总结",
+          post0Summary:
+            "永远不要因为有人做过就放弃，机会常在细分需求。想法不稀缺，执行才稀缺；LLM 到 Agent 之间仍有巨大系统工程鸿沟。",
+          post0Href: "posts/2026-02-21-weekly-summary.html"
+        },
+        en: {
+          post0Meta: "2026-02-21",
+          post0Title: "Weekly Summary",
+          post0Summary:
+            "Never quit a space just because others are in it. Execution matters more than ideas, and the gap from LLMs to real agents is still a systems challenge.",
+          post0Href: "posts/2026-02-21-weekly-summary-en.html"
+        }
+      };
+
+      const pageTitle = document.querySelector("title");
+      const pageDescription = document.querySelector('meta[name="description"]');
+      const translatableNodes = document.querySelectorAll("[data-i18n]");
+      const langButtons = document.querySelectorAll(".lang-btn");
+      const supportedLangs = ["zh", "en"];
+
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      function applyLanguage(lang) {
+        const selectedLang = supportedLangs.includes(lang) ? lang : "zh";
+        const uiDict = uiI18n[selectedLang];
+        const postDict = postsI18n[selectedLang];
+        const dict = { ...uiDict, ...postDict };
+
+        translatableNodes.forEach((node) => {
+          const key = node.dataset.i18n;
+          if (dict[key]) {
+            node.textContent = dict[key];
+          }
+        });
+
+        pageTitle.textContent = dict.pageTitle;
+        pageDescription.setAttribute("content", dict.pageDescription);
+        document.documentElement.setAttribute("lang", selectedLang === "zh" ? "zh-CN" : "en");
+        localStorage.setItem("blog-lang", selectedLang);
+
+        langButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.lang === selectedLang);
+        });
+
+        const post0Link = document.getElementById("post0Link");
+        if (post0Link) {
+          post0Link.setAttribute("href", postDict.post0Href);
+        }
+      }
+
+      const storedLang = localStorage.getItem("blog-lang");
+      const browserLang = navigator.language && navigator.language.toLowerCase().startsWith("en") ? "en" : "zh";
+      applyLanguage(storedLang || browserLang);
+
+      window.addEventListener("load", () => {
+        if (location.hash) {
+          history.replaceState(null, "", `${location.pathname}${location.search}`);
+        }
+        window.scrollTo(0, 0);
+      });
+
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyLanguage(button.dataset.lang);
+        });
+      });
+    </script>
+  </body>
+</html>
