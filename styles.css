@@ -237,6 +237,10 @@ html[lang="en"] .hero-text {
   opacity: 0.8;
 }
 
+html[lang="en"] .visitor-count {
+  font-size: 0.82rem;
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;
