@@ -24,6 +24,11 @@ body {
   line-height: 1.7;
 }
 
+html[lang="en"] body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
 h1,
 h2 {
   font-family: inherit;
@@ -86,7 +91,8 @@ main,
 
 .lang-switch {
   display: inline-flex;
-  padding: 0.2rem;
+  align-items: center;
+  padding: 0.18rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg-soft);
@@ -94,10 +100,15 @@ main,
 
 .lang-btn {
   border: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   color: var(--muted);
   font-weight: 700;
-  padding: 0.3rem 0.65rem;
+  min-height: 1.55rem;
+  line-height: 1;
+  padding: 0 0.65rem;
   border-radius: 999px;
   cursor: pointer;
 }
@@ -204,6 +215,19 @@ html[lang="en"] .hero-text {
 
 .site-footer p {
   margin: 0;
+}
+
+.site-footer p[data-i18n="footerText"] {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+.site-footer p[data-i18n="footerText"]::first-letter {
+  font-size: 1.2em;
+  position: relative;
+  top: 0.1em;
+  vertical-align: -0.08em;
+  line-height: 1;
 }
 
 .visitor-count {
