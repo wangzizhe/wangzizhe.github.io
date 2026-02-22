@@ -1,16 +1,26 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zizhe Wang | 个人博客</title>
+    <title>Zizhe Wang | Personal Blog</title>
     <meta
       name="description"
-      content="Zizhe Wang 的个人博客，记录创业思考与生活观察。"
+      content="Zizhe Wang’s personal blog on startup insights and reflections on life."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
+    <script>
+      (function normalizeEnglishRoute() {
+        const { pathname, search, hash } = window.location;
+        if (pathname === "/en" || pathname.endsWith("/en/index.html")) {
+          const normalized = pathname.replace(/\/index\.html$/, "/");
+          window.location.replace(`${normalized}${search}${hash}`);
+        }
+      })();
+    </script>
+
     <div class="background-shape shape-a"></div>
     <div class="background-shape shape-b"></div>
 
@@ -25,9 +35,9 @@
       </nav>
 
       <section class="hero">
-        <h1 data-i18n="heroTitle">嗨😸</h1>
+        <h1 data-i18n="heroTitle">Hi😸</h1>
         <p class="hero-text" data-i18n="heroText">
-          这里分享我在技术、产品、创业与生活中的思考与实践。
+          I share my thoughts and practice in technology, product, my startup journey, and life.
         </p>
       </section>
     </header>
@@ -41,7 +51,7 @@
             <p data-i18n="post0Summary">
               细分需求永远有机会；执行力比想法稀缺一万倍；LLM 到 Agent 之间还有巨大的系统工程鸿沟
             </p>
-            <a id="post0Link" href="posts/2026-02-21-weekly-summary.html" data-i18n="readMore">继续阅读</a>
+            <a id="post0Link" href="../posts/2026-02-21-weekly-summary-en.html" data-i18n="readMore">Read More</a>
           </article>
           <article class="post-card">
             <p class="meta" data-i18n="post1Meta">2026-02-14</p>
@@ -49,7 +59,7 @@
             <p data-i18n="post1Summary">
               以及我为什么选择用创业去锻造它
             </p>
-            <a id="post1Link" href="posts/2026-02-14-founder-nonlinear-capability.html" data-i18n="readMore">继续阅读</a>
+            <a id="post1Link" href="../posts/2026-02-14-founder-nonlinear-capability-en.html" data-i18n="readMore">Read More</a>
           </article>
           <article class="post-card">
             <p class="meta" data-i18n="post2Meta">2026-02-07</p>
@@ -57,7 +67,7 @@
             <p data-i18n="post2Summary">
               我在成为“自由人”后的第一周，真正感受到了不确定性的压力，也更确认了当下是我的窗口期。对我而言，稳定并不等于安全，在被边缘化的产业环境里，选择确定性反而可能更快失去竞争力和选择权。我也越来越确定，不确定性里往往蕴含着巨大的机会，所以我选择拥抱它。
             </p>
-            <a id="post2Link" href="posts/2026-02-07-understanding-uncertainty.html" data-i18n="readMore">继续阅读</a>
+            <a id="post2Link" href="../posts/2026-02-07-understanding-uncertainty-en.html" data-i18n="readMore">Read More</a>
           </article>
           <article class="post-card">
             <p class="meta" data-i18n="post3Meta">2026-01-31</p>
@@ -65,7 +75,7 @@
             <p data-i18n="post3Summary">
               一次在雪中的长谈，关于德国、世界变化、技术浪潮与个人选择。衣服被雪打湿却浑然不觉
             </p>
-            <a id="post3Link" href="posts/2026-01-31-snow-talk.html" data-i18n="readMore">继续阅读</a>
+            <a id="post3Link" href="../posts/2026-01-31-snow-talk-en.html" data-i18n="readMore">Read More</a>
           </article>
         </div>
       </section>
@@ -73,7 +83,7 @@
 
     <footer class="site-footer">
       <p id="busuanzi_container_site_pv" class="visitor-count" style="display: none">
-        <span data-i18n="visitsLabel">访问量</span>:
+        <span data-i18n="visitsLabel">Visits</span>:
         <span id="busuanzi_value_site_pv">0</span>
       </p>
       <p data-i18n="footerText">© 2026 Zizhe Wang</p>
