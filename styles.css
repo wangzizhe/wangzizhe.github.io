@@ -130,7 +130,7 @@ main,
 
 html[lang="en"] .hero h1 {
   font-family: "Helvetica Neue", Arial, sans-serif;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
 }
 
 .hero-text {
@@ -141,7 +141,7 @@ html[lang="en"] .hero h1 {
 
 html[lang="en"] .hero-text {
   max-width: none;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .section {
@@ -200,6 +200,17 @@ html[lang="en"] .hero-text {
   color: var(--muted);
   font-size: 0.9rem;
   text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.visitor-count {
+  margin-top: -0.5rem;
+  margin-bottom: 5rem;
+  font-size: 0.78rem;
+  opacity: 0.8;
 }
 
 @keyframes fade-up {
