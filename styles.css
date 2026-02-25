@@ -223,10 +223,10 @@ html[lang="en"] .hero-text {
 }
 
 .site-footer p[data-i18n="footerText"]::first-letter {
-  font-size: 1.2em;
+  font-size: 1.05em;
   position: relative;
-  top: 0.1em;
-  vertical-align: -0.08em;
+  top: 0.03em;
+  vertical-align: -0.04em;
   line-height: 1;
 }
 
