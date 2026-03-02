@@ -1,0 +1,68 @@
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ByteSpider
+Disallow: /
+
+User-agent: MoonshotBot
+Disallow: /
+
+User-agent: KimiBot
+Disallow: /
+
+User-agent: Kimi
+Disallow: /
+
+User-agent: DeepSeekBot
+Disallow: /
+
+User-agent: DeepSeek
+Disallow: /
+
+User-agent: MiniMaxBot
+Disallow: /
+
+User-agent: MiniMax
+Disallow: /
+
+User-agent: QwenBot
+Disallow: /
+
+User-agent: Qwen
+Disallow: /
+
+User-agent: ZhipuBot
+Disallow: /
+
+User-agent: ChatGLM-Spider
+Disallow: /
+
+User-agent: GLM
+Disallow: /
+
+User-agent: MistralAI-User
+Disallow: /
+
+User-agent: MistralBot
+Disallow: /
+
+User-agent: *
+Allow: /
