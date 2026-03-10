@@ -120,6 +120,7 @@ main,
 
 .hero {
   margin-top: 0.4rem;
+  margin-left: 0.18rem;
   max-width: 740px;
   animation: fade-up 0.7s ease-out both;
 }
@@ -139,6 +140,11 @@ main,
   margin-top: 0.45rem;
 }
 
+.hero-emoji {
+  display: inline-block;
+  margin-left: 0.12em;
+}
+
 html[lang="en"] .hero h1 {
   font-family: "Helvetica Neue", Arial, sans-serif;
   letter-spacing: -0.025em;
@@ -146,6 +152,7 @@ html[lang="en"] .hero h1 {
 
 .hero-text {
   font-size: 1.08rem;
+  margin-left: 0.22rem;
   max-width: 62ch;
   color: #2f3b3f;
 }

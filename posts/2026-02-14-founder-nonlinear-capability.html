@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles.css" />
     <style>
       .post-layout {
-        width: min(860px, calc(100% - 2.4rem));
+        width: min(1100px, calc(100% - 2.4rem));
         margin: 1.2rem auto 3rem;
       }
 
@@ -24,17 +24,20 @@
         font-weight: 700;
       }
 
+      .post-header {
+        margin: 1rem 0 0.8rem 0.28rem;
+      }
+
       .post-article {
-        margin-top: 1rem;
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: 18px;
         box-shadow: var(--shadow);
-        padding: 1.5rem 1.4rem;
+        padding: 1.1rem 1.2rem;
       }
 
-      .post-article h1 {
-        font-size: clamp(1.8rem, 5vw, 2.6rem);
+      .post-header h1 {
+        font-size: clamp(1.7rem, 4.6vw, 2.35rem);
         margin: 0.2rem 0 0.6rem;
         letter-spacing: 0.01em;
       }
@@ -81,10 +84,11 @@
   <body>
     <main class="post-layout">
       <a class="post-back" href="../index.html">← 返回首页</a>
-      <article class="post-article">
+      <header class="post-header">
         <p class="post-date">2026-02-14</p>
         <h1>创始人的非线性能力</h1>
-
+      </header>
+      <article class="post-article">
         <p>
           在创业和投资语境中，“非线性能力”经常被提起。它本质上是对杠杆、不确定性，以及产业与技术如何共同放大的理解。很多创业失败，并不是因为能力不够，而是因为投入的努力，从一开始就落在了一个不会被放大的区间里。
         </p>
@@ -111,5 +115,12 @@
         </p>
       </article>
     </main>
+    <footer class="site-footer">
+      <p>© 2026 Zizhe Wang. All rights reserved.</p>
+      <p class="legal-note">
+        <span>未经书面授权，禁止将本站任何内容</span>
+        <span>用于人工智能模型训练、微调、评测或数据集构建。</span>
+      </p>
+    </footer>
   </body>
 </html>

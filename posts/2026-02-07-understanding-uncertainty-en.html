@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../styles.css" />
     <style>
       .post-layout {
-        width: min(820px, calc(100% - 2.4rem));
+        width: min(1100px, calc(100% - 2.4rem));
         margin: 1.2rem auto 3rem;
       }
 
@@ -24,17 +24,20 @@
         font-weight: 700;
       }
 
+      .post-header {
+        margin: 1rem 0 0.8rem 0.28rem;
+      }
+
       .post-article {
-        margin-top: 1rem;
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: 18px;
         box-shadow: var(--shadow);
-        padding: 1.5rem 1.4rem;
+        padding: 1.1rem 1.2rem;
       }
 
-      .post-article h1 {
-        font-size: clamp(1.8rem, 5vw, 2.6rem);
+      .post-header h1 {
+        font-size: clamp(1.7rem, 4.6vw, 2.35rem);
         margin: 0.2rem 0 1rem;
         letter-spacing: 0.01em;
       }
@@ -55,10 +58,11 @@
   <body>
     <main class="post-layout">
       <a class="post-back" href="../en/">&larr; Back to Home</a>
-      <article class="post-article">
+      <header class="post-header">
         <p class="post-date">2026-02-07</p>
         <h1>On My Understanding of Uncertainty</h1>
-
+      </header>
+      <article class="post-article">
         <p>
           Since February 2026, I have officially become a free agent. This week, I clearly felt a huge amount of uncertainty and fear. It feels completely different from building products and experimenting with startups in my spare time before. Now I am truly stepping into the unknown, and I am facing my fear of it much more directly.
         </p>
@@ -84,5 +88,12 @@
         </p>
       </article>
     </main>
+    <footer class="site-footer">
+      <p>© 2026 Zizhe Wang. All rights reserved.</p>
+      <p class="legal-note">
+        <span>Without prior written permission, no content on this site</span>
+        <span>may be used for AI model training, fine-tuning, evaluation, or dataset construction.</span>
+      </p>
+    </footer>
   </body>
 </html>

@@ -15,23 +15,25 @@
     <link rel="stylesheet" href="../styles.css" />
     <style>
       .post-layout {
-        width: min(860px, calc(100% - 2.4rem));
+        width: min(1100px, calc(100% - 2.4rem));
         margin: 1.2rem auto 3rem;
       }
       .post-back {
         color: var(--muted);
         font-weight: 700;
       }
+      .post-header {
+        margin: 1rem 0 0.8rem 0.28rem;
+      }
       .post-article {
-        margin-top: 1rem;
         background: var(--card);
         border: 1px solid var(--line);
         border-radius: 18px;
         box-shadow: var(--shadow);
-        padding: 1.5rem 1.4rem;
+        padding: 1.1rem 1.2rem;
       }
-      .post-article h1 {
-        font-size: clamp(1.8rem, 5vw, 2.6rem);
+      .post-header h1 {
+        font-size: clamp(1.7rem, 4.6vw, 2.35rem);
         margin: 0.2rem 0 0.55rem;
         letter-spacing: 0.01em;
       }
@@ -56,11 +58,11 @@
   <body>
     <main class="post-layout">
       <a class="post-back" href="../en/">&larr; Back to Home</a>
-      <article class="post-article">
+      <header class="post-header">
         <p class="post-date">2026-03-01</p>
         <h1>When Everything Can Be Replaced by AI, What Will Be Left of Us?</h1>
-        <p class="post-subtitle">As tools grow ever more powerful, the only thing we truly need to face is how to become ourselves.</p>
-
+      </header>
+      <article class="post-article">
         <p>Since last year, I’ve been thinking about one question over and over again: in the age of AI agents, what do humans still have that cannot be replaced? Many people feel deep anxiety about AI, and that anxiety is not groundless. AI agents are replacing large amounts of labor at an extremely fast pace, and unlike previous technological revolutions, there is currently no clear pattern where a disappearing job is matched by the creation of a new one. When a human role is replaced, it is often simply gone rather than transformed into another position. Recently, some people have even argued that the entire software and SaaS industries may face structural disruption. I largely agree with these assessments.</p>
         <p>But people who know me well also know this: I am genuinely excited about the arrival of the AI agent era. So far in my life, no technological wave has ever made me feel this excited. And so the question becomes more concrete. In a highly automated future that I myself can hardly fully imagine, what exactly will remain that AI cannot replace?</p>
         <p>To answer this question, I realized I had to return to something more fundamental: why am I alive in the first place? A few years ago, I read The Selfish Gene by Richard Dawkins, and it left a deep impression on me. The book presents a highly counterintuitive yet internally consistent idea. It is not species that evolve in order to survive, but genes that use organisms in order to replicate themselves. From this perspective, living beings, including humans, are merely vehicles for genes to survive and reproduce. Many instincts we take for granted, such as the desire to survive, sexual drive, hunger, thirst, and sleepiness, are essentially traits selected by natural selection because they help genes persist. I found this idea fascinating.</p>
@@ -73,8 +75,15 @@
         <p>I believe these abilities are things AI can never truly acquire. Just as different species among carbon-based life have evolved different strengths, silicon-based life will also have its own advantages and limitations. AI will reach extremes in the areas it excels at, but the human capacity for feeling and experience remains uniquely human. Everything we have lived through, all our joy and sorrow, shape individuals who cannot be copied. Humans go through life without taking much with them in the end, but we do not need to take anything with us. These feelings and experiences themselves are our most distinctive form of value.</p>
         <p>For this reason, I now devote much of my time to thinking, creating, feeling, and experiencing. I believe that in this age, one of the most important human abilities is creativity, because the cost of executing ideas is constantly decreasing, while the ability to clearly understand what is worth doing is becoming increasingly rare. By handing more tasks over to AI, I have freed myself to focus on what feels more essential. The most interesting part is that many of my best ideas do not emerge while I am actively trying to think, but rather when my brain is at rest. For me, the most effective way to generate creative ideas is to think deeply about something first and then go do something else. Many ideas emerge unexpectedly while walking, commuting, or training.</p>
         <p>Whether we are talking about different species, carbon-based life versus silicon-based life, humanity as a whole, or each individual person, every existence is unique. In the age of AI agents, what we should truly do is not to be consumed by anxiety about replacement, but to liberate ourselves and devote more time to thinking, creating, feeling, and experiencing.</p>
-        <p>As tools grow ever more powerful, the only thing we truly need to face is how to become ourselves. To take what it means to be human, and push it as far as possible.</p>
+        <p>To take what it means to be human, and push it as far as possible.</p>
       </article>
     </main>
+    <footer class="site-footer">
+      <p>© 2026 Zizhe Wang. All rights reserved.</p>
+      <p class="legal-note">
+        <span>Without prior written permission, no content on this site</span>
+        <span>may be used for AI model training, fine-tuning, evaluation, or dataset construction.</span>
+      </p>
+    </footer>
   </body>
 </html>
