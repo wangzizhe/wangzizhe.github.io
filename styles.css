@@ -311,8 +311,9 @@ html[lang="en"] .visitor-count {
 }
 
 .share-menu {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
   margin-top: 0;
   padding: 0;
@@ -361,11 +362,17 @@ html[lang="en"] .visitor-count {
   height: 1.42rem;
 }
 
+.share-link[data-share-link="x"] svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
 .share-status {
   min-height: 1.2rem;
   margin: 0.1rem 0 0;
   color: var(--muted);
   font-size: 0.72rem;
+  text-align: center;
 }
 
 @media (max-width: 860px) {
@@ -398,6 +405,11 @@ html[lang="en"] .visitor-count {
   .share-link[data-share-link="whatsapp"] svg {
     width: 1.26rem;
     height: 1.26rem;
+  }
+
+  .share-link[data-share-link="x"] svg {
+    width: 1.06rem;
+    height: 1.06rem;
   }
 }
 
