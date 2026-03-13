@@ -73,7 +73,8 @@ main,
 }
 
 .site-header {
-  padding: 0.6rem 0 1.6rem;
+  position: relative;
+  padding: 0.6rem 0 1.05rem;
 }
 
 .nav {
@@ -89,38 +90,78 @@ main,
   margin-left: auto;
 }
 
+.site-header .nav {
+  position: absolute;
+  top: 1.45rem;
+  left: 0;
+  right: 0;
+  width: min(760px, 100%);
+  margin: 0 auto;
+  align-items: flex-start;
+  z-index: 1;
+}
+
+.site-header .lang-switch {
+  margin-top: 0;
+}
+
+.post-nav {
+  align-items: flex-start;
+  width: 100%;
+}
+
+.post-nav .lang-switch {
+  margin-top: 0;
+}
+
 .lang-switch {
   display: inline-flex;
   align-items: center;
-  padding: 0.18rem;
-  border: 1px solid var(--line);
+  margin-top: 0.28rem;
+  padding: 0.14rem;
+  border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: 999px;
-  background: var(--bg-soft);
+  background: rgba(239, 252, 255, 0.64);
+  box-shadow: 0 6px 16px rgba(12, 34, 40, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px) saturate(145%);
+  -webkit-backdrop-filter: blur(10px) saturate(145%);
 }
 
 .lang-btn {
+  appearance: none;
+  -webkit-appearance: none;
   border: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  color: var(--muted);
+  color: rgba(31, 42, 46, 0.78);
+  font-family: inherit;
+  font-size: 0.82rem;
   font-weight: 700;
-  min-height: 1.55rem;
+  min-height: 1.4rem;
   line-height: 1;
-  padding: 0 0.65rem;
+  padding: 0 0.56rem;
   border-radius: 999px;
   cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.lang-btn:hover {
+  background: rgba(255, 255, 255, 0.42);
+  color: var(--primary-dark);
 }
 
 .lang-btn.is-active {
-  background: var(--primary-dark);
-  color: #f5fbfc;
+  background: rgba(12, 110, 120, 0.9);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 6px rgba(12, 110, 120, 0.16);
 }
 
 .hero {
   margin-top: 0.4rem;
-  margin-left: 0.18rem;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 740px;
   animation: fade-up 0.7s ease-out both;
 }
@@ -152,7 +193,7 @@ html[lang="en"] .hero h1 {
 
 .hero-text {
   font-size: 1.08rem;
-  margin-left: 0.22rem;
+  margin: 0.65rem 0 0.18rem 0.22rem;
   max-width: 62ch;
   color: #2f3b3f;
 }
@@ -190,6 +231,7 @@ html[lang="en"] .hero-text {
   flex-direction: column;
   gap: 0.9rem;
   max-width: 760px;
+  margin: 0 auto;
 }
 
 .post-card {
@@ -255,6 +297,104 @@ html[lang="en"] .hero-text {
 
 html[lang="en"] .visitor-count {
   font-size: 0.82rem;
+}
+
+.share-section {
+  margin-top: 1.55rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(109, 122, 128, 0.18);
+  display: block;
+}
+
+.share-menu {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0;
+  padding: 0;
+}
+
+.share-link,
+.share-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  border: 1px solid rgba(109, 122, 128, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.share-link:hover,
+.share-copy:hover {
+  border-color: rgba(12, 110, 120, 0.34);
+  color: var(--primary-dark);
+  background: rgba(12, 110, 120, 0.05);
+  transform: translateY(-1px);
+}
+
+.share-link svg {
+  width: 1.32rem;
+  height: 1.32rem;
+  fill: currentColor;
+}
+
+.share-copy svg {
+  width: 1.16rem;
+  height: 1.16rem;
+  fill: currentColor;
+}
+
+.share-link[data-share-link="linkedin"] svg,
+.share-link[data-share-link="whatsapp"] svg {
+  width: 1.42rem;
+  height: 1.42rem;
+}
+
+.share-status {
+  min-height: 1.2rem;
+  margin: 0.1rem 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 860px) {
+  .share-section {
+    margin-top: 1.25rem;
+    padding-top: 0.85rem;
+  }
+
+  .share-menu {
+    gap: 0.42rem;
+  }
+
+  .share-link,
+  .share-copy {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  .share-link svg {
+    width: 1.18rem;
+    height: 1.18rem;
+  }
+
+  .share-copy svg {
+    width: 1.02rem;
+    height: 1.02rem;
+  }
+
+  .share-link[data-share-link="linkedin"] svg,
+  .share-link[data-share-link="whatsapp"] svg {
+    width: 1.26rem;
+    height: 1.26rem;
+  }
 }
 
 @keyframes fade-up {
