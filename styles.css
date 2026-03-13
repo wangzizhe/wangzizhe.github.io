@@ -270,6 +270,52 @@ html[lang="en"] .hero-text {
   margin: 0;
 }
 
+.footer-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.78rem;
+  margin: 0 0 0.72rem;
+}
+
+.footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: #64748b;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.footer-socials a:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+.footer-social-website {
+  color: #6f7cff;
+}
+
+.footer-website-icon {
+  width: 1.42rem;
+  height: 1.42rem;
+  display: block;
+}
+
+.footer-social-image {
+  width: 1.28rem;
+  height: 1.28rem;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-github-icon {
+  width: 1.34rem;
+  height: 1.34rem;
+  display: block;
+}
+
 .site-footer p[data-i18n="footerText"] {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
