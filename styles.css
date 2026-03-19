@@ -351,8 +351,10 @@ html[lang="en"] .visitor-count {
 
 .share-section {
   margin-top: 1.55rem;
-  padding-top: 0.95rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.45rem;
   border-top: 1px solid rgba(109, 122, 128, 0.18);
+  position: relative;
   display: block;
 }
 
@@ -365,8 +367,7 @@ html[lang="en"] .visitor-count {
   padding: 0;
 }
 
-.share-link,
-.share-copy {
+.share-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -382,8 +383,7 @@ html[lang="en"] .visitor-count {
     transform 0.18s ease;
 }
 
-.share-link:hover,
-.share-copy:hover {
+.share-link:hover {
   border-color: rgba(12, 110, 120, 0.34);
   color: var(--primary-dark);
   background: rgba(12, 110, 120, 0.05);
@@ -393,12 +393,6 @@ html[lang="en"] .visitor-count {
 .share-link svg {
   width: 1.32rem;
   height: 1.32rem;
-  fill: currentColor;
-}
-
-.share-copy svg {
-  width: 1.16rem;
-  height: 1.16rem;
   fill: currentColor;
 }
 
@@ -413,26 +407,18 @@ html[lang="en"] .visitor-count {
   height: 1.2rem;
 }
 
-.share-status {
-  min-height: 1.2rem;
-  margin: 0.1rem 0 0;
-  color: var(--muted);
-  font-size: 0.72rem;
-  text-align: center;
-}
-
 @media (max-width: 860px) {
   .share-section {
     margin-top: 1.25rem;
-    padding-top: 0.85rem;
+    padding-top: 1.05rem;
+    padding-bottom: 0.35rem;
   }
 
   .share-menu {
     gap: 0.42rem;
   }
 
-  .share-link,
-  .share-copy {
+  .share-link {
     width: 2.15rem;
     height: 2.15rem;
   }
@@ -440,11 +426,6 @@ html[lang="en"] .visitor-count {
   .share-link svg {
     width: 1.18rem;
     height: 1.18rem;
-  }
-
-  .share-copy svg {
-    width: 1.02rem;
-    height: 1.02rem;
   }
 
   .share-link[data-share-link="linkedin"] svg,
