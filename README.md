@@ -1,6 +1,6 @@
-# Zizhe Wang's Blog
+# Wang Zizhe's Blog
 
-This repository contains the source code and content for Zizhe Wang's personal blog.
+This repository contains the source code and content for Wang Zizhe's personal blog.
 
 ## Copyright
 
