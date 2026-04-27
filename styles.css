@@ -493,7 +493,8 @@ html[lang="en"] .visitor-count {
   font-size: 1.03rem;
 }
 
-.post-article ol {
+.post-article ol,
+.post-article ul {
   margin: 0 0 1rem;
   padding-left: 0;
   list-style-position: inside;
@@ -503,6 +504,16 @@ html[lang="en"] .visitor-count {
   font-size: 1.03rem;
   margin-bottom: 0.3rem;
   padding-left: 0;
+}
+
+.release-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 1rem;
+}
+
+.release-list li {
+  margin: 0.25rem 0;
 }
 
 @media (max-width: 860px) {
