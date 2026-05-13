@@ -14,12 +14,40 @@
     <link rel="alternate" hreflang="zh-CN" href="./2026-04-19-50-minutes-26-seconds.html" />
     <link rel="alternate" hreflang="x-default" href="./2026-04-19-50-minutes-26-seconds.html" />
     <link rel="stylesheet" href="../styles.css" />
+    <script>
+      (function() {
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (dark ? 'dark' : 'light'));
+      })();
+    </script>
   </head>
   <body>
     <main class="post-layout">
       <nav class="nav post-nav">
         <a class="post-back" href="../en/index.html">← Back to Home</a>
         <div class="nav-right">
+          <div class="theme-switch" aria-label="Theme switcher">
+            <button class="theme-btn is-active" data-theme="light" type="button" aria-label="Light mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/>
+                <line x1="12" y1="2" x2="12" y2="4"/>
+                <line x1="12" y1="20" x2="12" y2="22"/>
+                <line x1="4.93" y1="4.93" x2="6.35" y2="6.35"/>
+                <line x1="17.65" y1="17.65" x2="19.07" y2="19.07"/>
+                <line x1="2" y1="12" x2="4" y2="12"/>
+                <line x1="20" y1="12" x2="22" y2="12"/>
+                <line x1="6.35" y1="17.65" x2="4.93" y2="19.07"/>
+                <line x1="19.07" y1="4.93" x2="17.65" y2="6.35"/>
+              </svg>
+            </button>
+            <button class="theme-btn" data-theme="dark" type="button" aria-label="Dark mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </div>
           <div class="lang-switch" aria-label="Language switcher">
             <a class="lang-btn" href="./2026-04-19-50-minutes-26-seconds.html">中</a>
             <a class="lang-btn is-active" href="./2026-04-19-50-minutes-26-seconds-en.html" aria-current="page">EN</a>
@@ -106,5 +134,6 @@
       </p>
     </footer>
     <script src="../post-share.js"></script>
+    <script src="../theme-toggle.js"></script>
   </body>
 </html>

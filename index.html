@@ -10,6 +10,14 @@
       content="Wang Zizhe 的个人博客，记录创业思考与生活观察。"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function() {
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', saved || (dark ? 'dark' : 'light'));
+      })();
+    </script>
   </head>
   <body>
     <div class="background-shape shape-a"></div>
@@ -18,6 +26,26 @@
     <header class="site-header">
       <nav class="nav">
         <div class="nav-right">
+          <div class="theme-switch" aria-label="Theme switcher">
+            <button class="theme-btn is-active" data-theme="light" type="button" aria-label="亮色模式">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"/>
+                <line x1="12" y1="2" x2="12" y2="4"/>
+                <line x1="12" y1="20" x2="12" y2="22"/>
+                <line x1="4.93" y1="4.93" x2="6.35" y2="6.35"/>
+                <line x1="17.65" y1="17.65" x2="19.07" y2="19.07"/>
+                <line x1="2" y1="12" x2="4" y2="12"/>
+                <line x1="20" y1="12" x2="22" y2="12"/>
+                <line x1="6.35" y1="17.65" x2="4.93" y2="19.07"/>
+                <line x1="19.07" y1="4.93" x2="17.65" y2="6.35"/>
+              </svg>
+            </button>
+            <button class="theme-btn" data-theme="dark" type="button" aria-label="暗色模式">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </div>
           <div class="lang-switch" aria-label="Language switcher">
             <button class="lang-btn is-active" data-lang="zh" type="button">中</button>
             <button class="lang-btn" data-lang="en" type="button">EN</button>
@@ -191,6 +219,7 @@
     </footer>
 
     <script>
+
       const uiI18n = {
         zh: {
           post0Meta: "2026-05-10",
@@ -372,6 +401,7 @@
       }
 
       function applyLanguage(lang) {
+        if (window.__clearTypewriter) window.__clearTypewriter();
         const selectedLang = supportedLangs.includes(lang) ? lang : "zh";
         const uiDict = uiI18n[selectedLang];
         const postDict = postsI18n[selectedLang];
@@ -423,6 +453,50 @@
           applyLanguage(targetLang);
         });
       });
+
+      // ===== Typewriter Effect =====
+      (function() {
+        const TEXT_SPEED = 25;
+        let typewriterTimeout = null;
+        window.__clearTypewriter = function() {
+          if (typewriterTimeout) {
+            clearTimeout(typewriterTimeout);
+            typewriterTimeout = null;
+          }
+        };
+
+        function typeWriter(element, text, speed) {
+          return new Promise((resolve) => {
+            element.classList.add('typing');
+            let i = 0;
+
+            function type() {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typewriterTimeout = setTimeout(type, speed);
+              } else {
+                element.classList.remove('typing');
+                typewriterTimeout = null;
+                resolve();
+              }
+            }
+
+            type();
+          });
+        }
+
+        const heroText = document.querySelector('.hero-text[data-i18n="heroText"]');
+        if (!heroText) return;
+
+        const textText = heroText.textContent.trim();
+        heroText.textContent = '';
+
+        setTimeout(() => {
+          typeWriter(heroText, textText, TEXT_SPEED);
+        }, 500);
+      })();
     </script>
+      <script src="theme-toggle.js"></script>
   </body>
 </html>
