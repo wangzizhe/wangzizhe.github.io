@@ -222,7 +222,7 @@ main,
   color: rgba(31, 42, 46, 0.78);
   font-family: inherit;
   font-size: 0.82rem;
-  font-weight: 400;
+  font-weight: 500;
   width: 2.2rem;
   height: 1.6rem;
   min-height: 1.6rem;
@@ -279,7 +279,7 @@ main,
 .theme-btn svg {
   width: 0.9rem;
   height: 0.9rem;
-  stroke-width: 2.35;
+  stroke-width: 2.5;
 }
 
 .theme-btn:hover {
@@ -369,6 +369,11 @@ main,
   background: rgba(91, 196, 208, 0.85);
   color: #1a1d21;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 6px rgba(91, 196, 208, 0.2);
+}
+
+.theme-switch .theme-btn.is-active,
+.lang-switch .lang-btn.is-active {
+  display: none;
 }
 
 .hero {
@@ -723,6 +728,29 @@ html[lang="en"] .hero-text {
 .post-article p {
   margin: 0 0 1rem;
   font-size: 1.03rem;
+}
+
+.post-image-slot {
+  margin: 1.2rem 0 1.25rem;
+}
+
+.post-image-slot img {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(109, 122, 128, 0.18);
+}
+
+.post-image-slot figcaption {
+  margin-top: 0.45rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.post-image-slot figcaption a {
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
 .post-article ol,

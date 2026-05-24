@@ -76,6 +76,14 @@
       <section id="posts" class="section">
         <div class="post-grid">
           <article class="post-card">
+            <p class="meta" data-i18n="post15Meta">2026-05-17</p>
+            <h3 data-i18n="post15Title">Dixieland Jazz Festival: Those Magical Moments Connected by Music</h3>
+            <p data-i18n="post15Summary">
+              The most charming thing about music has never been just the music itself.
+            </p>
+            <a id="post15Link" href="../posts/2026-05-17-dixieland-jazz-festival-en.html" data-i18n="readMore">Read More</a>
+          </article>
+          <article class="post-card">
             <p class="meta" data-i18n="post0Meta">2026-05-10</p>
             <h3 data-i18n="post0Title">One Year of Investing: Through Market Cycles and Human Nature, Letting Time Do the Heavy Lifting</h3>
             <a id="post0Link" href="../posts/2026-05-10-one-year-of-investing-en.html" data-i18n="readMore">Read More</a>
@@ -304,6 +312,10 @@
 
       const postsI18n = {
         zh: {
+          post15Meta: "2026-05-17",
+          post15Title: "迪克西兰爵士节：那些被音乐连接的奇妙瞬间",
+          post15Summary: "音乐最迷人的，从来不只是音乐。",
+          post15Href: "../posts/2026-05-17-dixieland-jazz-festival.html",
           post6Meta: "2026-03-29",
           post6Title: "中国的科技公司为什么会在欧洲设立软件开发团队",
           post6Summary:
@@ -351,6 +363,10 @@
           post14Href: "../posts/2026-01-31-snow-talk.html"
         },
         en: {
+          post15Meta: "2026-05-17",
+          post15Title: "Dixieland Jazz Festival: Those Magical Moments Connected by Music",
+          post15Summary: "The most charming thing about music has never been just the music itself.",
+          post15Href: "../posts/2026-05-17-dixieland-jazz-festival-en.html",
           post6Meta: "2026-03-29",
           post6Title: "Why Chinese Tech Companies Have Software Development Teams in Europe",
           post6Summary:
@@ -432,7 +448,7 @@
           button.classList.toggle("is-active", button.dataset.lang === selectedLang);
         });
 
-        for (let index = 0; index <= 14; index += 1) {
+        for (let index = 0; index <= 15; index += 1) {
           const postLink = document.getElementById(`post${index}Link`);
           const postHref = dict[`post${index}Href`];
           if (postLink && postHref) {
