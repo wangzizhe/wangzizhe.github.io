@@ -65,6 +65,11 @@
       <section id="posts" class="section">
         <div class="post-grid">
           <article class="post-card">
+            <p class="meta" data-i18n="post18Meta">2026-06-07</p>
+            <h3 data-i18n="post18Title">一个小目标</h3>
+            <a id="post18Link" href="posts/2026-06-07-a-small-goal.html" data-i18n="readMore">继续阅读</a>
+          </article>
+          <article class="post-card">
             <p class="meta" data-i18n="post17Meta">2026-05-31</p>
             <h3 data-i18n="post17Title">每月 60 亿 token：一个 AI 原生开发者的用量基准</h3>
             <a id="post17Link" href="posts/2026-05-31-ai-native-developer-token-baseline.html" data-i18n="readMore">继续阅读</a>
@@ -265,6 +270,9 @@
 
       const postsI18n = {
         zh: {
+          post18Meta: "2026-06-07",
+          post18Title: "一个小目标",
+          post18Href: "posts/2026-06-07-a-small-goal.html",
           post17Meta: "2026-05-31",
           post17Title: "每月 60 亿 token：一个 AI 原生开发者的用量基准",
           post17Href: "posts/2026-05-31-ai-native-developer-token-baseline.html",
@@ -345,6 +353,9 @@
           post14Href: "posts/2026-01-31-snow-talk.html"
         },
         en: {
+          post18Meta: "2026-06-07",
+          post18Title: "A Small Goal",
+          post18Href: "posts/2026-06-07-a-small-goal-en.html",
           post17Meta: "2026-05-31",
           post17Title: "6 Billion Tokens a Month: A Baseline for AI-Native Developers",
           post17Href: "posts/2026-05-31-ai-native-developer-token-baseline-en.html",
@@ -459,7 +470,7 @@
           button.classList.toggle("is-active", button.dataset.lang === selectedLang);
         });
 
-        for (let index = 0; index <= 17; index += 1) {
+        for (let index = 0; index <= 18; index += 1) {
           const postLink = document.getElementById(`post${index}Link`);
           const postHref = dict[`post${index}Href`];
           if (postLink && postHref) {
