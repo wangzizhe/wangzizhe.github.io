@@ -76,6 +76,11 @@
       <section id="posts" class="section">
         <div class="post-grid">
           <article class="post-card">
+            <p class="meta" data-i18n="post19Meta">2026-06-17</p>
+            <h3 data-i18n="post19Title">My PhD is finally over</h3>
+            <a id="post19Link" href="../posts/2026-06-17-my-phd-is-finally-over-en.html" data-i18n="readMore">Read More</a>
+          </article>
+          <article class="post-card">
             <p class="meta" data-i18n="post18Meta">2026-06-07</p>
             <h3 data-i18n="post18Title">A Small Goal</h3>
             <a id="post18Link" href="../posts/2026-06-07-a-small-goal-en.html" data-i18n="readMore">Read More</a>
@@ -281,6 +286,9 @@
 
       const postsI18n = {
         zh: {
+          post19Meta: "2026-06-17",
+          post19Title: "博士终于结束了。",
+          post19Href: "../posts/2026-06-17-my-phd-is-finally-over.html",
           post18Meta: "2026-06-07",
           post18Title: "一个小目标",
           post18Href: "../posts/2026-06-07-a-small-goal.html",
@@ -364,6 +372,9 @@
           post14Href: "../posts/2026-01-31-snow-talk.html"
         },
         en: {
+          post19Meta: "2026-06-17",
+          post19Title: "My PhD is finally over",
+          post19Href: "../posts/2026-06-17-my-phd-is-finally-over-en.html",
           post18Meta: "2026-06-07",
           post18Title: "A Small Goal",
           post18Href: "../posts/2026-06-07-a-small-goal-en.html",
@@ -481,7 +492,7 @@
           button.classList.toggle("is-active", button.dataset.lang === selectedLang);
         });
 
-        for (let index = 0; index <= 18; index += 1) {
+        for (let index = 0; index <= 19; index += 1) {
           const postLink = document.getElementById(`post${index}Link`);
           const postHref = dict[`post${index}Href`];
           if (postLink && postHref) {
