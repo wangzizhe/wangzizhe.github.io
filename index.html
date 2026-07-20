@@ -65,6 +65,11 @@
       <section id="posts" class="section">
         <div class="post-grid">
           <article class="post-card">
+            <p class="meta" data-i18n="post21Meta">2026-07-19</p>
+            <h3 data-i18n="post21Title">第一次参加黑客松</h3>
+            <a id="post21Link" href="posts/2026-07-19-first-hackathon.html" data-i18n="readMore">继续阅读</a>
+          </article>
+          <article class="post-card">
             <p class="meta" data-i18n="post20Meta">2026-06-28</p>
             <h3 data-i18n="post20Title">一通电话，把我带回2012年</h3>
             <a id="post20Link" href="posts/2026-06-28-phone-call-back-to-2012.html" data-i18n="readMore">继续阅读</a>
@@ -280,6 +285,9 @@
 
       const postsI18n = {
         zh: {
+          post21Meta: "2026-07-19",
+          post21Title: "第一次参加黑客松",
+          post21Href: "posts/2026-07-19-first-hackathon.html",
           post20Meta: "2026-06-28",
           post20Title: "一通电话，把我带回2012年",
           post20Href: "posts/2026-06-28-phone-call-back-to-2012.html",
@@ -369,6 +377,9 @@
           post14Href: "posts/2026-01-31-snow-talk.html"
         },
         en: {
+          post21Meta: "2026-07-19",
+          post21Title: "My First Hackathon",
+          post21Href: "posts/2026-07-19-first-hackathon-en.html",
           post20Meta: "2026-06-28",
           post20Title: "A Phone Call That Took Me Back to 2012",
           post20Href: "posts/2026-06-28-phone-call-back-to-2012-en.html",
@@ -492,7 +503,7 @@
           button.classList.toggle("is-active", button.dataset.lang === selectedLang);
         });
 
-        for (let index = 0; index <= 20; index += 1) {
+        for (let index = 0; index <= 21; index += 1) {
           const postLink = document.getElementById(`post${index}Link`);
           const postHref = dict[`post${index}Href`];
           if (postLink && postHref) {
