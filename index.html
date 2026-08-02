@@ -65,6 +65,14 @@
       <section id="posts" class="section">
         <div class="post-grid">
           <article class="post-card">
+            <p class="meta" data-i18n="post25Meta">2026-08-02</p>
+            <h3 data-i18n="post25Title">马斯克接受《经济学人》采访</h3>
+            <p data-i18n="post25Summary">
+              最后半小时可以说精彩至极
+            </p>
+            <a id="post25Link" href="posts/2026-08-02-musk-economist-interview.html" data-i18n="readMore">继续阅读</a>
+          </article>
+          <article class="post-card">
             <p class="meta" data-i18n="post24Meta">2026-07-26</p>
             <h3 data-i18n="post24Title">一个咿呀学语的孩子，让我重新思考人类与 AI</h3>
             <a id="post24Link" href="posts/2026-07-26-how-humans-learn-to-speak.html" data-i18n="readMore">继续阅读</a>
@@ -303,6 +311,10 @@
 
       const postsI18n = {
         zh: {
+          post25Meta: "2026-08-02",
+          post25Title: "马斯克接受《经济学人》采访",
+          post25Summary: "最后半小时可以说精彩至极",
+          post25Href: "posts/2026-08-02-musk-economist-interview.html",
           post24Meta: "2026-07-26",
           post24Title: "一个咿呀学语的孩子，让我重新思考人类与 AI",
           post24Href: "posts/2026-07-26-how-humans-learn-to-speak.html",
@@ -405,6 +417,10 @@
           post14Href: "posts/2026-01-31-snow-talk.html"
         },
         en: {
+          post25Meta: "2026-08-02",
+          post25Title: "Elon Musk’s Interview with The Economist",
+          post25Summary: "The final half hour was absolutely fascinating",
+          post25Href: "posts/2026-08-02-musk-economist-interview-en.html",
           post24Meta: "2026-07-26",
           post24Title: "What a Babbling Child Made Me Rethink About AI",
           post24Href: "posts/2026-07-26-how-humans-learn-to-speak-en.html",
@@ -541,7 +557,7 @@
           button.classList.toggle("is-active", button.dataset.lang === selectedLang);
         });
 
-        for (let index = 0; index <= 24; index += 1) {
+        for (let index = 0; index <= 25; index += 1) {
           const postLink = document.getElementById(`post${index}Link`);
           const postHref = dict[`post${index}Href`];
           if (postLink && postHref) {
