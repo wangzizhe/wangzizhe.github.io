@@ -1,0 +1,9 @@
+{
+  "name": "wangzizhe-blog",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/build.mjs --check && node --check blog-index.js && node --check posts.js && node --check post-share.js && node --check theme-toggle.js"
+  }
+}
