@@ -66,3 +66,5 @@ Disallow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://wangzizhe.github.io/sitemap.xml
