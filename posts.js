@@ -1,5 +1,16 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-09-20",
+    zh: {
+      title: "一次头痛，让我开始理解疼痛",
+      href: "posts/2026-09-20-understanding-pain.html"
+    },
+    en: {
+      title: "A Headache That Helped Me Understand Pain",
+      href: "posts/2026-09-20-understanding-pain-en.html"
+    }
+  },
+  {
     date: "2026-08-02",
     zh: {
       title: "马斯克接受《经济学人》采访",
