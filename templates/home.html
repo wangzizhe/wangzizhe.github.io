@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="{{LANG}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="{{PREFIX}}assets/favicon.png" />
+    <title>{{PAGE_TITLE}}</title>
+    <meta
+      name="description"
+      content="{{DESCRIPTION}}"
+    />
+{{SEO}}
+    <link rel="stylesheet" href="{{PREFIX}}styles.css" />
+{{THEME_INIT}}
+  </head>
+  <body>
+    <div class="background-shape shape-a"></div>
+    <div class="background-shape shape-b"></div>
+
+    <header class="site-header">
+      <nav class="nav">
+        <div class="nav-right">
+          <div class="theme-switch" aria-label="Theme switcher"></div>
+          <div class="lang-switch" aria-label="Language switcher">
+            <a class="lang-btn{{ZH_ACTIVE}}" href="{{ZH_HREF}}"{{ZH_CURRENT}}>中</a>
+            <a class="lang-btn{{EN_ACTIVE}}" href="{{EN_HREF}}"{{EN_CURRENT}}>EN</a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <h1><span data-i18n="heroTitle">{{HERO_TITLE}}</span><span class="hero-emoji">😸</span></h1>
+        <p class="hero-text" data-i18n="heroText">
+          {{HERO_TEXT}}
+        </p>
+      </section>
+    </header>
+
+    <main>
+      <section id="posts" class="section">
+        <div class="post-grid" id="postGrid">
+{{POST_CARDS}}
+        </div>
+      </section>
+    </main>
+
+{{FOOTER}}
+
+    <script src="{{PREFIX}}blog-index.js"></script>
+    <script src="{{PREFIX}}theme-toggle.js"></script>
+  </body>
+</html>

@@ -40,17 +40,27 @@ function validatePosts(posts) {
   }
 
   posts.forEach((post, index) => {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date || "")) {
+    if (!post || typeof post !== "object") {
+      errors.push(`post ${index + 1}: expected an object`);
+      return;
+    }
+    const parsedDate = new Date(`${post.date}T00:00:00Z`);
+    if (typeof post.date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(post.date) ||
+        !Number.isFinite(parsedDate.getTime()) || parsedDate.toISOString().slice(0, 10) !== post.date) {
       errors.push(`post ${index + 1}: invalid date`);
     }
-    if (index > 0 && posts[index - 1].date < post.date) {
+    if (index > 0 && posts[index - 1]?.date < post.date) {
       errors.push(`post ${index + 1}: posts must be ordered newest first`);
     }
 
     for (const lang of ["zh", "en"]) {
       const localized = post[lang];
-      if (!localized?.title || !localized?.href) {
+      if (typeof localized?.title !== "string" || !localized.title.trim() || typeof localized?.href !== "string" || !localized.href) {
         errors.push(`post ${index + 1}: missing ${lang} title or href`);
+        continue;
+      }
+      if (!/^posts\/[a-z0-9-]+\.html$/.test(localized.href)) {
+        errors.push(`invalid article path: ${localized.href}`);
         continue;
       }
       if (hrefs.has(localized.href)) {
@@ -83,14 +93,53 @@ function renderCards(posts, lang, prefix) {
     .join("\n");
 }
 
-function updatePostGrid(html, cards) {
-  const block = `<div class="post-grid" id="postGrid">
-${cards}
-        </div>`;
-  if (!/<div class="post-grid" id="postGrid">[\s\S]*?<\/div>/.test(html)) {
-    throw new Error("Could not find #postGrid");
-  }
-  return html.replace(/<div class="post-grid" id="postGrid">[\s\S]*?<\/div>/, block);
+function renderTemplate(template, values) {
+  return template.replace(/{{([A-Z0-9_]+)}}/g, (placeholder, key) => {
+    if (!Object.hasOwn(values, key)) throw new Error(`Unresolved template value: ${key}`);
+    return values[key];
+  });
+}
+
+function sharedValues(lang, prefix) {
+  const english = lang === "en";
+  const values = {
+    LANG: english ? "en" : "zh-CN",
+    PREFIX: prefix,
+    ZH_ACTIVE: english ? "" : " is-active",
+    EN_ACTIVE: english ? " is-active" : "",
+    ZH_CURRENT: english ? "" : ' aria-current="page"',
+    EN_CURRENT: english ? ' aria-current="page"' : "",
+    NOTICE_LINE_1: english
+      ? "Without prior written permission, no content on this site"
+      : "未经书面授权，禁止将本站任何内容",
+    NOTICE_LINE_2: english
+      ? "may be used for AI model training, fine-tuning, evaluation, or dataset construction."
+      : "用于人工智能模型训练、微调、评测或数据集构建。"
+  };
+  return {
+    ...values,
+    FOOTER: renderTemplate(read("templates/footer.html").trimEnd(), values),
+    THEME_INIT: read("templates/theme-init.html").trimEnd()
+  };
+}
+
+function renderHomePage(template, posts, lang, prefix) {
+  const english = lang === "en";
+  return renderTemplate(template, {
+    ...sharedValues(lang, prefix),
+    PAGE_TITLE: english ? "Wang Zizhe | Personal Blog" : "Wang Zizhe | 个人博客",
+    DESCRIPTION: english
+      ? "Wang Zizhe’s personal blog on startup insights and reflections on life."
+      : "Wang Zizhe 的个人博客，记录创业思考与生活观察。",
+    SEO: homeSeo(lang),
+    ZH_HREF: english ? "../" : "./",
+    EN_HREF: english ? "./" : "en/",
+    HERO_TITLE: english ? "Hi" : "嗨",
+    HERO_TEXT: english
+      ? "Thoughts and practice in technology, product, my startup journey, and life."
+      : "这里分享我在技术、产品、创业与生活中的思考与实践。",
+    POST_CARDS: renderCards(posts, lang, prefix)
+  });
 }
 
 function jsonLd(data) {
@@ -176,7 +225,8 @@ function renderArticlePage(template, post, lang) {
     .map((line) => (line ? `        ${line}` : ""))
     .join("\n");
   const values = {
-    LANG: english ? "en" : "zh-CN",
+    ...sharedValues(lang, "../"),
+    HOME_HREF: english ? "../en/" : "../",
     PAGE_TITLE: escapeHtml(`${post.date} ${localized.title} | Wang Zizhe`),
     DESCRIPTION: escapeHtml(description),
     SEO: articleSeo(post, lang, description),
@@ -185,46 +235,11 @@ function renderArticlePage(template, post, lang) {
     POST_TITLE: escapeHtml(localized.title),
     ZH_FILE: path.basename(post.zh.href),
     EN_FILE: path.basename(post.en.href),
-    ZH_ACTIVE: english ? "" : " is-active",
-    EN_ACTIVE: english ? " is-active" : "",
-    ZH_CURRENT: english ? "" : ' aria-current="page"',
-    EN_CURRENT: english ? ' aria-current="page"' : "",
     ARTICLE_BODY: body,
-    SHARE_LABEL: english ? "Share this article" : "分享这篇文章",
-    NOTICE_LINE_1: english
-      ? "Without prior written permission, no content on this site"
-      : "未经书面授权，禁止将本站任何内容",
-    NOTICE_LINE_2: english
-      ? "may be used for AI model training, fine-tuning, evaluation, or dataset construction."
-      : "用于人工智能模型训练、微调、评测或数据集构建。"
+    SHARE_LABEL: english ? "Share this article" : "分享这篇文章"
   };
 
-  let html = template;
-  for (const [key, value] of Object.entries(values)) {
-    html = html.replaceAll(`{{${key}}}`, value);
-  }
-  const unresolved = html.match(/{{[A-Z0-9_]+}}/g);
-  if (unresolved) throw new Error(`Unresolved template values: ${unresolved.join(", ")}`);
-  return html;
-}
-
-function injectSeo(html, block) {
-  if (html.includes(generatedStart)) {
-    return html.replace(
-      new RegExp(`${generatedStart}[\\s\\S]*?${generatedEnd}`),
-      block.trim()
-    );
-  }
-
-  const withoutOldLinks = html.replace(
-    /^\s*<link rel="(?:canonical|alternate)"[^>]*\/>\s*$/gm,
-    ""
-  );
-  const description = /<meta\s+name="description"[\s\S]*?\/>/;
-  if (!description.test(withoutOldLinks)) {
-    throw new Error("Could not find description metadata");
-  }
-  return withoutOldLinks.replace(description, (match) => `${match}\n${block}`);
+  return renderTemplate(template, values);
 }
 
 function sitemap(posts) {
@@ -277,14 +292,12 @@ ${items}
 function expectedFiles(posts) {
   const files = new Map();
   const articleTemplate = read("templates/post.html");
+  const homeTemplate = read("templates/home.html");
   for (const [file, lang, prefix] of [
     ["index.html", "zh", ""],
     ["en/index.html", "en", "../"]
   ]) {
-    let html = read(file);
-    html = updatePostGrid(html, renderCards(posts, lang, prefix));
-    html = injectSeo(html, homeSeo(lang));
-    files.set(file, html);
+    files.set(file, renderHomePage(homeTemplate, posts, lang, prefix));
   }
 
   for (const post of posts) {
@@ -307,8 +320,10 @@ function verifyLocalReferences(files) {
     for (const match of content.matchAll(/(?:href|src)="([^"]+)"/g)) {
       const value = match[1].split(/[?#]/)[0];
       if (!value || /^(?:https?:|mailto:|tel:|data:)/.test(value)) continue;
-      const target = path.resolve(root, path.dirname(file), value);
-      if (!fs.existsSync(target) && !files.has(path.relative(root, target))) {
+      const target = path.resolve(root, path.dirname(file), value, value.endsWith("/") ? "index.html" : "");
+      const relative = path.relative(root, target).split(path.sep).join("/");
+      const generatedArticle = relative.startsWith("posts/") && relative.endsWith(".html");
+      if (generatedArticle ? !files.has(relative) : !fs.existsSync(target) && !files.has(relative)) {
         errors.push(`${file} -> ${match[1]}`);
       }
     }
@@ -330,18 +345,37 @@ if (referenceErrors.length) {
   process.exit(1);
 }
 
+// posts/ contains generated pages only; article sources live in content/posts/.
+const orphaned = fs.existsSync(path.join(root, "posts"))
+  ? fs.readdirSync(path.join(root, "posts"), { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".html"))
+    .map((entry) => `posts/${entry.name}`)
+    .filter((file) => !files.has(file))
+  : [];
+if (checkOnly && orphaned.length) {
+  console.error(`Orphaned generated articles:\n${orphaned.join("\n")}\nRun: node scripts/build.mjs`);
+  process.exit(1);
+}
+
 const stale = [];
 for (const [file, expected] of files) {
   const fullPath = path.join(root, file);
   const current = fs.existsSync(fullPath) ? fs.readFileSync(fullPath, "utf8") : null;
   if (current === expected) continue;
   if (checkOnly) stale.push(file);
-  else fs.writeFileSync(fullPath, expected);
+  else {
+    fs.mkdirSync(path.dirname(fullPath), { recursive: true });
+    fs.writeFileSync(fullPath, expected);
+  }
 }
 
 if (stale.length) {
   console.error(`Generated files are stale:\n${stale.join("\n")}\nRun: node scripts/build.mjs`);
   process.exit(1);
+}
+
+if (!checkOnly) {
+  for (const file of orphaned) fs.unlinkSync(path.join(root, file));
 }
 
 console.log(checkOnly ? "Generated files and links are valid." : `Generated ${files.size} files.`);

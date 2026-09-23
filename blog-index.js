@@ -21,6 +21,9 @@
   timeout = window.setTimeout(typeWriter, 350);
 
   window.addEventListener("pagehide", () => {
-    if (timeout) window.clearTimeout(timeout);
+    if (timeout !== null) window.clearTimeout(timeout);
+    timeout = null;
+    heroText.textContent = text;
+    heroText.classList.remove("typing");
   }, { once: true });
 })();

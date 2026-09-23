@@ -4,11 +4,13 @@ This repository is Wang Zizhe's personal static blog. Keep changes simple, expli
 
 ## Project Structure
 
-- `index.html`: Chinese homepage.
-- `en/index.html`: English homepage.
+- `index.html`: Generated Chinese homepage; do not edit directly.
+- `en/index.html`: Generated English homepage; do not edit directly.
 - `posts.js`: Canonical bilingual post list for homepage rendering.
 - `content/posts/*.html`: Canonical article body fragments.
+- `templates/home.html`: Shared shell for both homepages.
 - `templates/post.html`: Shared shell for every generated article page.
+- `templates/footer.html`, `templates/theme-init.html`: Shared footer and initial theme script.
 - `blog-index.js`: Progressive enhancement for the homepage hero typewriter effect.
 - `scripts/build.mjs`: Validates post data and generates homepage cards, SEO metadata, sitemap, and RSS feeds.
 - `styles.css`: Shared visual styles for homepages and post pages.
@@ -18,7 +20,7 @@ This repository is Wang Zizhe's personal static blog. Keep changes simple, expli
 
 ## Homepage Rules
 
-- Do not hand-code post cards in `index.html` or `en/index.html`; run `npm run build`.
+- Edit homepage structure in `templates/home.html` and localized text in `scripts/build.mjs`; run `npm run build`.
 - Add or update homepage post metadata in `posts.js`.
 - Keep `posts.js` ordered newest first.
 - Each post entry should include:
@@ -48,7 +50,8 @@ This repository is Wang Zizhe's personal static blog. Keep changes simple, expli
 ```
 
 - Language buttons on detail pages remain explicit links to the paired post page.
-- Homepage language switching is handled by `blog-index.js`.
+- Homepage language switching uses links generated from `templates/home.html`.
+- `blog-index.js` only enhances the hero text with a typewriter effect.
 - Current visual behavior: hide the active option, so the UI shows the action the user can switch to.
 
 ## Footer
@@ -73,5 +76,6 @@ git diff --check
 ```
 
 The check dynamically validates post count, ordering, bilingual pairs, generated files,
-local links, and JavaScript syntax. GitHub Actions runs the same command on pushes and
+local links, calendar dates, orphaned generated articles, JavaScript syntax, and regression tests.
+Builds remove orphaned HTML under `posts/`; source fragments under `content/posts/` are preserved. GitHub Actions runs the same command on pushes and
 pull requests.
