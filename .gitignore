@@ -15,3 +15,7 @@ yarn-error.log*
 
 # Agent
 .agents/
+BLOG_CONTEXT.md
+
+# Dependencies
+node_modules/
