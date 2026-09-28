@@ -1,5 +1,16 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-09-27",
+    zh: {
+      title: "十年前的今天，我来到了德国。",
+      href: "posts/2026-09-27-ten-years-in-germany.html"
+    },
+    en: {
+      title: "Ten years ago today, I came to Germany.",
+      href: "posts/2026-09-27-ten-years-in-germany-en.html"
+    }
+  },
+  {
     date: "2026-09-20",
     zh: {
       title: "一次头痛，让我开始理解疼痛",
