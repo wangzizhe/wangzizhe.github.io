@@ -1,5 +1,16 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-10-18",
+    zh: {
+      title: "一周感想",
+      href: "posts/2026-10-18-weekly-thoughts.html"
+    },
+    en: {
+      title: "Weekly Thoughts",
+      href: "posts/2026-10-18-weekly-thoughts-en.html"
+    }
+  },
+  {
     date: "2026-09-27",
     zh: {
       title: "十年前的今天，我来到了德国。",
