@@ -11,6 +11,17 @@ window.BLOG_POSTS = [
     }
   },
   {
+    date: "2026-10-25",
+    zh: {
+      title: "Computer 曾经是人，Programmer 呢？",
+      href: "posts/2026-10-25-computers-were-once-human.html"
+    },
+    en: {
+      title: "Computers Were Once Human. What About Programmers?",
+      href: "posts/2026-10-25-computers-were-once-human-en.html"
+    }
+  },
+  {
     date: "2026-10-18",
     zh: {
       title: "一周感想",

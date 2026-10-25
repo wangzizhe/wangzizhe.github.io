@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -105,6 +106,7 @@ function sharedValues(lang, prefix) {
   const values = {
     LANG: english ? "en" : "zh-CN",
     PREFIX: prefix,
+    STYLE_VERSION: createHash("sha256").update(read("styles.css")).digest("hex").slice(0, 12),
     ZH_ACTIVE: english ? "" : " is-active",
     EN_ACTIVE: english ? " is-active" : "",
     ZH_CURRENT: english ? "" : ' aria-current="page"',

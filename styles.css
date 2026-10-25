@@ -608,6 +608,16 @@ html[lang="en"] .hero-text {
   padding: 1.1rem 1.2rem;
 }
 
+.post-article h2 {
+  margin: 1rem 0;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.post-article > h2:first-child {
+  margin-top: 0;
+}
+
 .post-article p {
   margin: 0 0 1rem;
   font-size: 1.03rem;
