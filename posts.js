@@ -1,5 +1,16 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-11-01",
+    zh: {
+      title: "我发现自己还不够疯狂，想得还不够大",
+      href: "posts/2026-11-01-thinking-big-and-bold.html"
+    },
+    en: {
+      title: "I Realized I Haven't Been Thinking Big Enough or Boldly Enough",
+      href: "posts/2026-11-01-thinking-big-and-bold-en.html"
+    }
+  },
+  {
     date: "2026-10-18",
     zh: {
       title: "一周感想",
