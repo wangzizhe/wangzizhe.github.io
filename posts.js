@@ -6,7 +6,7 @@ window.BLOG_POSTS = [
       href: "posts/2026-11-01-thinking-big-and-bold.html"
     },
     en: {
-      title: "I Realized I Haven't Been Thinking Big Enough or Boldly Enough",
+      title: "I Realized I Haven't Been Thinking Big or Bold Enough",
       href: "posts/2026-11-01-thinking-big-and-bold-en.html"
     }
   },
