@@ -1,5 +1,16 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-11-12",
+    zh: {
+      title: "缅怀老黄",
+      href: "posts/2026-11-12-in-memory-of-jensen.html"
+    },
+    en: {
+      title: "In Memory of Jensen",
+      href: "posts/2026-11-12-in-memory-of-jensen-en.html"
+    }
+  },
+  {
     date: "2026-11-01",
     zh: {
       title: "我发现自己还不够疯狂，想得还不够大",
