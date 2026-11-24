@@ -14,9 +14,6 @@
 {{THEME_INIT}}
   </head>
   <body>
-    <div class="background-shape shape-a"></div>
-    <div class="background-shape shape-b"></div>
-
     <header class="site-header">
       <nav class="nav">
         <div class="nav-right">
@@ -29,7 +26,7 @@
       </nav>
 
       <section class="hero">
-        <h1><span data-i18n="heroTitle">{{HERO_TITLE}}</span><span class="hero-emoji">😸</span></h1>
+        <h1>{{HERO_TITLE}}<span class="hero-emoji">😸</span></h1>
         <p class="hero-text" data-i18n="heroText">
           {{HERO_TEXT}}
         </p>
@@ -37,8 +34,8 @@
     </header>
 
     <main>
-      <section id="posts" class="section">
-        <div class="post-grid" id="postGrid">
+      <section id="posts">
+        <div class="post-grid">
 {{POST_CARDS}}
         </div>
       </section>
@@ -47,6 +44,6 @@
 {{FOOTER}}
 
     <script src="{{PREFIX}}blog-index.js"></script>
-    <script src="{{PREFIX}}theme-toggle.js"></script>
+    <script src="{{PREFIX}}theme-toggle.js?v={{THEME_SCRIPT_VERSION}}"></script>
   </body>
 </html>

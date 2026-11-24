@@ -361,12 +361,12 @@ window.BLOG_POSTS = [
     date: "2026-02-07",
     zh: {
       title: "对于不确定性的理解",
-      summary: "我在成为“自由人”后的第一周，真正感受到了不确定性的压力，也更确认了当下是我的窗口期。对我而言，稳定并不等于安全，在被边缘化的产业环境里，选择确定性反而可能更快失去竞争力和选择权。我也越来越确定，不确定性里往往蕴含着巨大的机会，所以我选择拥抱它。",
+      summary: "对我而言，稳定并不等于安全，追求确定性反而可能加速失去竞争力和选择权。我越来越确信，不确定性中蕴藏着巨大的机会，所以我选择拥抱它。",
       href: "posts/2026-02-07-understanding-uncertainty.html"
     },
     en: {
       title: "On My Understanding of Uncertainty",
-      summary: "In my first week as a free agent, I truly felt the pressure of uncertainty, and it also made me more certain that this is my window. For me, stability does not equal safety. In a marginalized industrial environment, choosing certainty may actually make you lose competitiveness and optionality faster. I have also become increasingly convinced that uncertainty often contains huge opportunities, so I choose to embrace it.",
+      summary: "To me, stability does not mean safety. Pursuing certainty may actually cause me to lose my competitive edge and optionality faster. I’m increasingly convinced that uncertainty holds great opportunities, so I choose to embrace it.",
       href: "posts/2026-02-07-understanding-uncertainty-en.html"
     }
   },

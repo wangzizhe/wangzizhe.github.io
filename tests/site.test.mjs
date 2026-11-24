@@ -55,7 +55,7 @@ test('invalid calendar dates fail before output, including normalized February d
       assert.notEqual(result.status, 0);
       assert.match(result.stderr, /invalid date/);
     }
-    assert.equal(fs.existsSync(path.join(f.dir, 'rss.xml')), false);
+    assert.equal(fs.existsSync(path.join(f.dir, 'sitemap.xml')), false);
   }
   f.writePosts([{ ...posts[0], date: '2024-02-29' }]);
   success(f.run());
@@ -98,6 +98,38 @@ test('template values preserve dollar sequences and literal placeholder-like art
   const html = fs.readFileSync(path.join(f.dir, posts[0].zh.href), 'utf8');
   assert.ok(html.includes("Price $&amp; $' $` &lt;offer&gt;"));
   assert.ok(html.includes('<p>{{EXAMPLE}}</p>'));
+});
+
+test('theme follows saved changes in other tabs and on cached page restoration', () => {
+  let savedTheme = 'light';
+  let displayedTheme;
+  const events = {};
+  vm.runInNewContext(read('theme-toggle.js'), {
+    document: {
+      documentElement: { lang: 'en', setAttribute: (_, theme) => { displayedTheme = theme; } },
+      querySelectorAll: () => []
+    },
+    localStorage: { getItem: () => savedTheme },
+    window: {
+      matchMedia: () => ({ matches: false, addEventListener() {} }),
+      addEventListener: (name, callback) => { events[name] = callback; }
+    }
+  });
+
+  assert.equal(displayedTheme, 'light');
+  savedTheme = 'dark';
+  events.storage({ key: 'theme' });
+  assert.equal(displayedTheme, 'dark');
+
+  savedTheme = 'light';
+  events.pageshow({ persisted: true });
+  assert.equal(displayedTheme, 'light');
+
+  savedTheme = 'dark';
+  events.pageshow({ persisted: true });
+  savedTheme = null;
+  events.storage({ key: null });
+  assert.equal(displayedTheme, 'light');
 });
 
 for (const phase of ['before first character', 'mid-animation', 'after completion', 'reduced motion']) {

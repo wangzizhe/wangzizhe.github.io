@@ -9,9 +9,16 @@ const checkOnly = process.argv.includes("--check");
 const siteUrl = "https://wangzizhe.github.io";
 const generatedStart = "<!-- GENERATED:SEO:START -->";
 const generatedEnd = "<!-- GENERATED:SEO:END -->";
+const styleVersion = assetVersion("styles.css");
+const shareScriptVersion = assetVersion("post-share.js");
+const themeScriptVersion = assetVersion("theme-toggle.js");
 
 function read(relativePath) {
   return fs.readFileSync(path.join(root, relativePath), "utf8");
+}
+
+function assetVersion(relativePath) {
+  return createHash("sha256").update(read(relativePath)).digest("hex").slice(0, 12);
 }
 
 function escapeHtml(value) {
@@ -79,6 +86,7 @@ function validatePosts(posts) {
 
 function renderCards(posts, lang, prefix) {
   const readMore = lang === "zh" ? "继续阅读" : "Read More";
+  const labelSeparator = lang === "zh" ? "：" : ": ";
   return posts
     .map((post) => {
       const localized = post[lang];
@@ -88,7 +96,7 @@ function renderCards(posts, lang, prefix) {
       return `          <article class="post-card">
             <time class="meta" datetime="${post.date}">${post.date}</time>
             <h2>${escapeHtml(localized.title)}</h2>${summary}
-            <a href="${prefix}${escapeHtml(localized.href)}">${readMore}</a>
+            <a class="post-card-link" href="${prefix}${escapeHtml(localized.href)}" aria-label="${escapeHtml(readMore + labelSeparator + localized.title)}"><span class="post-card-link-text">${readMore}</span></a>
           </article>`;
     })
     .join("\n");
@@ -106,17 +114,15 @@ function sharedValues(lang, prefix) {
   const values = {
     LANG: english ? "en" : "zh-CN",
     PREFIX: prefix,
-    STYLE_VERSION: createHash("sha256").update(read("styles.css")).digest("hex").slice(0, 12),
+    STYLE_VERSION: styleVersion,
+    THEME_SCRIPT_VERSION: themeScriptVersion,
     ZH_ACTIVE: english ? "" : " is-active",
     EN_ACTIVE: english ? " is-active" : "",
     ZH_CURRENT: english ? "" : ' aria-current="page"',
     EN_CURRENT: english ? ' aria-current="page"' : "",
-    NOTICE_LINE_1: english
-      ? "Without prior written permission, no content on this site"
-      : "未经书面授权，禁止将本站任何内容",
-    NOTICE_LINE_2: english
-      ? "may be used for AI model training, fine-tuning, evaluation, or dataset construction."
-      : "用于人工智能模型训练、微调、评测或数据集构建。"
+    FOOTER_NOTICE: english
+      ? "Without prior written permission, no content on this site may be used for AI model training, fine-tuning, evaluation, or dataset construction."
+      : "未经书面授权，禁止将本站任何内容<br />用于人工智能模型训练、微调、评测或数据集构建。"
   };
   return {
     ...values,
@@ -127,13 +133,15 @@ function sharedValues(lang, prefix) {
 
 function renderHomePage(template, posts, lang, prefix) {
   const english = lang === "en";
+  const title = english ? "Wang Zizhe | Personal Blog" : "Wang Zizhe | 个人博客";
+  const description = english
+    ? "Wang Zizhe’s personal blog on startup insights and reflections on life."
+    : "Wang Zizhe 的个人博客，记录创业思考与生活观察。";
   return renderTemplate(template, {
     ...sharedValues(lang, prefix),
-    PAGE_TITLE: english ? "Wang Zizhe | Personal Blog" : "Wang Zizhe | 个人博客",
-    DESCRIPTION: english
-      ? "Wang Zizhe’s personal blog on startup insights and reflections on life."
-      : "Wang Zizhe 的个人博客，记录创业思考与生活观察。",
-    SEO: homeSeo(lang),
+    PAGE_TITLE: escapeHtml(title),
+    DESCRIPTION: escapeHtml(description),
+    SEO: homeSeo(lang, title, description),
     ZH_HREF: english ? "../" : "./",
     EN_HREF: english ? "./" : "en/",
     HERO_TITLE: english ? "Hi" : "嗨",
@@ -148,13 +156,9 @@ function jsonLd(data) {
   return JSON.stringify(data).replaceAll("<", "\\u003c");
 }
 
-function homeSeo(lang) {
+function homeSeo(lang, title, description) {
   const english = lang === "en";
   const url = `${siteUrl}${english ? "/en/" : "/"}`;
-  const title = english ? "Wang Zizhe | Personal Blog" : "Wang Zizhe | 个人博客";
-  const description = english
-    ? "Wang Zizhe’s personal blog on startup insights and reflections on life."
-    : "Wang Zizhe 的个人博客，记录创业思考与生活观察。";
   const locale = english ? "en_US" : "zh_CN";
   const alternateLocale = english ? "zh_CN" : "en_US";
   return `    ${generatedStart}
@@ -162,7 +166,6 @@ function homeSeo(lang) {
     <link rel="alternate" hreflang="zh-CN" href="${siteUrl}/" />
     <link rel="alternate" hreflang="en" href="${siteUrl}/en/" />
     <link rel="alternate" hreflang="x-default" href="${siteUrl}/" />
-    <link rel="alternate" type="application/rss+xml" title="${escapeHtml(title)}" href="${url}rss.xml" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
@@ -228,11 +231,12 @@ function renderArticlePage(template, post, lang) {
     .join("\n");
   const values = {
     ...sharedValues(lang, "../"),
+    SHARE_SCRIPT_VERSION: shareScriptVersion,
     HOME_HREF: english ? "../en/" : "../",
     PAGE_TITLE: escapeHtml(`${post.date} ${localized.title} | Wang Zizhe`),
     DESCRIPTION: escapeHtml(description),
     SEO: articleSeo(post, lang, description),
-    BACK_LABEL: english ? "← Back to Home" : "← 返回首页",
+    BACK_LABEL: english ? "Back to Home" : "返回首页",
     DATE: post.date,
     POST_TITLE: escapeHtml(localized.title),
     ZH_FILE: path.basename(post.zh.href),
@@ -260,37 +264,6 @@ ${urls.map(({ loc, lastmod }) => `  <url><loc>${escapeXml(loc)}</loc><lastmod>${
 `;
 }
 
-function rss(posts, lang) {
-  const english = lang === "en";
-  const baseUrl = `${siteUrl}${english ? "/en/" : "/"}`;
-  const title = english ? "Wang Zizhe | Personal Blog" : "Wang Zizhe | 个人博客";
-  const description = english
-    ? "Thoughts on technology, products, startups, and life."
-    : "关于技术、产品、创业与生活的思考。";
-  const items = posts.map((post) => {
-    const localized = post[lang];
-    const url = `${siteUrl}/${localized.href}`;
-    return `    <item>
-      <title>${escapeXml(localized.title)}</title>
-      <link>${escapeXml(url)}</link>
-      <guid isPermaLink="true">${escapeXml(url)}</guid>
-      <pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate>
-      <description>${escapeXml(localized.summary || localized.title)}</description>
-    </item>`;
-  }).join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>${escapeXml(title)}</title>
-    <link>${escapeXml(baseUrl)}</link>
-    <description>${escapeXml(description)}</description>
-    <language>${english ? "en" : "zh-CN"}</language>
-${items}
-  </channel>
-</rss>
-`;
-}
-
 function expectedFiles(posts) {
   const files = new Map();
   const articleTemplate = read("templates/post.html");
@@ -310,8 +283,6 @@ function expectedFiles(posts) {
   }
 
   files.set("sitemap.xml", sitemap(posts));
-  files.set("rss.xml", rss(posts, "zh"));
-  files.set("en/rss.xml", rss(posts, "en"));
   return files;
 }
 
