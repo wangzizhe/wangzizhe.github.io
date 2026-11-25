@@ -27,8 +27,8 @@
 
       <section class="hero">
         <h1>{{HERO_TITLE}}<span class="hero-emoji">😸</span></h1>
-        <p class="hero-text" data-i18n="heroText">
-          {{HERO_TEXT}}
+        <p class="hero-text">
+          <span class="hero-copy">{{HERO_TEXT}}</span><span class="hero-typing" aria-hidden="true"></span>
         </p>
       </section>
     </header>
@@ -43,7 +43,7 @@
 
 {{FOOTER}}
 
-    <script src="{{PREFIX}}blog-index.js"></script>
+    <script src="{{PREFIX}}blog-index.js?v={{HOME_SCRIPT_VERSION}}"></script>
     <script src="{{PREFIX}}theme-toggle.js?v={{THEME_SCRIPT_VERSION}}"></script>
   </body>
 </html>

@@ -89,6 +89,26 @@ test('links to removed articles fail before the build deletes anything', (t) => 
   assert.ok(fs.existsSync(path.join(f.dir, posts[0].zh.href)));
 });
 
+test('build and check report missing responsive image candidates', (t) => {
+  const f = fixture(t);
+  success(f.run());
+  for (const width of [720, 1024]) {
+    const file = `dixieland-festival-${width}.webp`;
+    const asset = path.join(f.dir, 'assets', file);
+    const saved = fs.readFileSync(asset);
+    fs.unlinkSync(asset);
+    for (const args of [[], ['--check']]) {
+      const result = f.run(...args);
+      assert.notEqual(result.status, 0);
+      for (const suffix of ['', '-en']) {
+        assert.ok(result.stderr.includes(`posts/2026-05-17-dixieland-jazz-festival${suffix}.html -> ../assets/${file}`));
+      }
+    }
+    fs.writeFileSync(asset, saved);
+  }
+  success(f.run('--check'));
+});
+
 test('template values preserve dollar sequences and literal placeholder-like article text', (t) => {
   const f = fixture(t);
   const title = "Price $& $' $` <offer>";
@@ -132,11 +152,31 @@ test('theme follows saved changes in other tabs and on cached page restoration',
   assert.equal(displayedTheme, 'light');
 });
 
+test('hero skips typing when the animation elements are missing', () => {
+  const original = 'Hello, world.';
+  for (const elements of [{}, { '.hero-copy': { textContent: original } }, { '.hero-typing': { textContent: '' } }]) {
+    const hero = { textContent: original, querySelector: (selector) => elements[selector] ?? null };
+    vm.runInNewContext(read('blog-index.js'), {
+      document: { querySelector: () => hero },
+      window: {
+        matchMedia: () => ({ matches: false }),
+        setTimeout: () => assert.fail('Typing should not start without both elements')
+      }
+    });
+    assert.equal(hero.textContent, original);
+  }
+});
+
 for (const phase of ['before first character', 'mid-animation', 'after completion', 'reduced motion']) {
   test(`hero retains full text after leaving: ${phase}`, () => {
     const original = 'Hello, world.';
     const classes = new Set();
-    const hero = { textContent: original, classList: { add: (c) => classes.add(c), remove: (c) => classes.delete(c) } };
+    const copy = { textContent: original };
+    const overlay = { textContent: '' };
+    const hero = {
+      querySelector: (selector) => ({ '.hero-copy': copy, '.hero-typing': overlay })[selector],
+      classList: { add: (c) => classes.add(c), remove: (c) => classes.delete(c) }
+    };
     const timers = new Map();
     const events = {};
     let id = 0;
@@ -154,10 +194,15 @@ for (const phase of ['before first character', 'mid-animation', 'after completio
       timers.delete(key);
       fn();
     }
-    if (phase === 'mid-animation') tick();
+    if (phase === 'mid-animation') {
+      tick();
+      assert.equal(overlay.textContent, 'H');
+    }
     if (phase === 'after completion') while (timers.size) tick();
+    assert.equal(copy.textContent, original);
     events.pagehide?.({ persisted: true });
-    assert.equal(hero.textContent, original);
+    assert.equal(copy.textContent, original);
+    assert.equal(overlay.textContent, '');
     assert.equal(timers.size, 0);
     assert.equal(classes.has('typing'), false);
   });

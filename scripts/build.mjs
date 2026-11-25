@@ -10,6 +10,7 @@ const siteUrl = "https://wangzizhe.github.io";
 const generatedStart = "<!-- GENERATED:SEO:START -->";
 const generatedEnd = "<!-- GENERATED:SEO:END -->";
 const styleVersion = assetVersion("styles.css");
+const homeScriptVersion = assetVersion("blog-index.js");
 const shareScriptVersion = assetVersion("post-share.js");
 const themeScriptVersion = assetVersion("theme-toggle.js");
 
@@ -139,6 +140,7 @@ function renderHomePage(template, posts, lang, prefix) {
     : "Wang Zizhe 的个人博客，记录创业思考与生活观察。";
   return renderTemplate(template, {
     ...sharedValues(lang, prefix),
+    HOME_SCRIPT_VERSION: homeScriptVersion,
     PAGE_TITLE: escapeHtml(title),
     DESCRIPTION: escapeHtml(description),
     SEO: homeSeo(lang, title, description),
@@ -286,18 +288,38 @@ function expectedFiles(posts) {
   return files;
 }
 
+function* srcsetUrls(srcset) {
+  let remaining = srcset;
+  while (true) {
+    // A URL token can contain commas, including the separator in a data URL.
+    const candidate = /^[,\t\n\f\r ]*([^\t\n\f\r ]+)/.exec(remaining);
+    if (!candidate) return;
+    const token = candidate[1];
+    const url = token.replace(/,+$/, "");
+    yield url;
+    remaining = remaining.slice(candidate[0].length);
+    if (url === token) remaining = remaining.replace(/^[^,]*,?/, "");
+  }
+}
+
 function verifyLocalReferences(files) {
   const errors = [];
   for (const [file, content] of files) {
     if (!file.endsWith(".html")) continue;
-    for (const match of content.matchAll(/(?:href|src)="([^"]+)"/g)) {
-      const value = match[1].split(/[?#]/)[0];
-      if (!value || /^(?:https?:|mailto:|tel:|data:)/.test(value)) continue;
-      const target = path.resolve(root, path.dirname(file), value, value.endsWith("/") ? "index.html" : "");
-      const relative = path.relative(root, target).split(path.sep).join("/");
-      const generatedArticle = relative.startsWith("posts/") && relative.endsWith(".html");
-      if (generatedArticle ? !files.has(relative) : !fs.existsSync(target) && !files.has(relative)) {
-        errors.push(`${file} -> ${match[1]}`);
+    const attributes = /(?:^|\s)(href|src|srcset)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/g;
+    for (const [, attribute, doubleQuoted, singleQuoted, unquoted] of content.matchAll(attributes)) {
+      const value = doubleQuoted ?? singleQuoted ?? unquoted;
+      const references = attribute === "srcset" ? srcsetUrls(value) : [value];
+      for (const reference of references) {
+        const pathname = reference.split(/[?#]/)[0];
+        if (!pathname || /^(?:https?:|mailto:|tel:|data:|\/\/)/i.test(pathname)) continue;
+        const base = pathname.startsWith("/") ? root : path.join(root, path.dirname(file));
+        const target = path.resolve(base, pathname.replace(/^\//, ""), pathname.endsWith("/") ? "index.html" : "");
+        const relative = path.relative(root, target).split(path.sep).join("/");
+        const generatedArticle = relative.startsWith("posts/") && relative.endsWith(".html");
+        if (generatedArticle ? !files.has(relative) : !fs.existsSync(target) && !files.has(relative)) {
+          errors.push(`${file} -> ${reference}`);
+        }
       }
     }
   }
