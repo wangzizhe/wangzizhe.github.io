@@ -1,5 +1,18 @@
 window.BLOG_POSTS = [
   {
+    date: "2026-11-22",
+    zh: {
+      title: "我们常常搞错了什么才是真正的风险",
+      summary: "我们常常高估不确定性带来的风险，却低估了不去尝试的代价。真正的风险不是失败，而是多年以后回望今天，后悔自己从未真正尝试过。",
+      href: "posts/2026-11-22-what-we-get-wrong-about-risk.html"
+    },
+    en: {
+      title: "What We Get Wrong About Risk",
+      summary: "We often overestimate the risks of uncertainty and underestimate the cost of not trying. The real risk is not failing, but looking back years later and regretting that we never really tried.",
+      href: "posts/2026-11-22-what-we-get-wrong-about-risk-en.html"
+    }
+  },
+  {
     date: "2026-11-12",
     zh: {
       title: "缅怀老黄",
@@ -361,12 +374,12 @@ window.BLOG_POSTS = [
     date: "2026-02-07",
     zh: {
       title: "对于不确定性的理解",
-      summary: "对我而言，稳定并不等于安全，追求确定性反而可能加速失去竞争力和选择权。我越来越确信，不确定性中蕴藏着巨大的机会，所以我选择拥抱它。",
+      summary: "对我而言，稳定 ≠ 安全，追求确定性反而会让我失去竞争力和选择权。我坚信，不确定性中蕴藏着巨大的机会，因此我选择主动拥抱它。",
       href: "posts/2026-02-07-understanding-uncertainty.html"
     },
     en: {
       title: "On My Understanding of Uncertainty",
-      summary: "To me, stability does not mean safety. Pursuing certainty may actually cause me to lose my competitive edge and optionality faster. I’m increasingly convinced that uncertainty holds great opportunities, so I choose to embrace it.",
+      summary: "To me, stability ≠ security. Pursuing certainty can actually make me lose my competitive edge and limit my options. I strongly believe that uncertainty holds great opportunities, so I choose to embrace it.",
       href: "posts/2026-02-07-understanding-uncertainty-en.html"
     }
   },

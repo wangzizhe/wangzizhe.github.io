@@ -25,7 +25,7 @@
     <meta name="twitter:description" content="Wang Zizhe’s personal blog on startup insights and reflections on life." />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wang Zizhe | Personal Blog","url":"https://wangzizhe.github.io/en/","inLanguage":"en"}</script>
     <!-- GENERATED:SEO:END -->
-    <link rel="stylesheet" href="../styles.css?v=7ff10660e63e" />
+    <link rel="stylesheet" href="../styles.css?v=c35b90e85965" />
     <script>
       (function() {
         var saved = null;
@@ -35,6 +35,32 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    <script>
+      (function() {
+        function prepareLanguageTransition(event, otherUrl) {
+          if (!event.viewTransition) return;
+          var link = document.querySelector('.lang-btn:not(.is-active)');
+          var label = link && link.querySelector('.lang-label');
+          if (!label || link.href !== otherUrl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            event.viewTransition.skipTransition();
+            return;
+          }
+          label.style.viewTransitionName = 'language-label';
+          event.viewTransition.finished.then(function() {
+            label.style.viewTransitionName = '';
+          }, function() {
+            label.style.viewTransitionName = '';
+          });
+        }
+        window.addEventListener('pageswap', function(event) {
+          prepareLanguageTransition(event, event.activation && event.activation.entry.url);
+        });
+        window.addEventListener('pagereveal', function(event) {
+          var activation = window.navigation && window.navigation.activation;
+          prepareLanguageTransition(event, activation && activation.from && activation.from.url);
+        });
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -42,8 +68,8 @@
         <div class="nav-right">
           <div class="theme-switch" aria-label="Theme switcher"></div>
           <div class="lang-switch" aria-label="Language switcher">
-            <a class="lang-btn" href="../">中</a>
-            <a class="lang-btn is-active" href="./" aria-current="page">EN</a>
+            <a class="lang-btn" href="../"><span class="lang-label">中</span></a>
+            <a class="lang-btn is-active" href="./" aria-current="page"><span class="lang-label">EN</span></a>
           </div>
         </div>
       </nav>
@@ -59,6 +85,12 @@
     <main>
       <section id="posts">
         <div class="post-grid">
+          <article class="post-card">
+            <time class="meta" datetime="2026-11-22">2026-11-22</time>
+            <h2>What We Get Wrong About Risk</h2>
+            <p>We often overestimate the risks of uncertainty and underestimate the cost of not trying. The real risk is not failing, but looking back years later and regretting that we never really tried.</p>
+            <a class="post-card-link" href="../posts/2026-11-22-what-we-get-wrong-about-risk-en.html" aria-label="Read More: What We Get Wrong About Risk"><span class="post-card-link-text">Read More</span></a>
+          </article>
           <article class="post-card">
             <time class="meta" datetime="2026-11-12">2026-11-12</time>
             <h2>In Memory of Jensen</h2>
@@ -226,7 +258,7 @@
           <article class="post-card">
             <time class="meta" datetime="2026-02-07">2026-02-07</time>
             <h2>On My Understanding of Uncertainty</h2>
-            <p>To me, stability does not mean safety. Pursuing certainty may actually cause me to lose my competitive edge and optionality faster. I’m increasingly convinced that uncertainty holds great opportunities, so I choose to embrace it.</p>
+            <p>To me, stability ≠ security. Pursuing certainty can actually make me lose my competitive edge and limit my options. I strongly believe that uncertainty holds great opportunities, so I choose to embrace it.</p>
             <a class="post-card-link" href="../posts/2026-02-07-understanding-uncertainty-en.html" aria-label="Read More: On My Understanding of Uncertainty"><span class="post-card-link-text">Read More</span></a>
           </article>
           <article class="post-card">
@@ -248,10 +280,10 @@
         </a>
       </div>
       <p lang="en">© 2026 Wang Zizhe. All rights reserved.</p>
-      <p class="legal-note">Without prior written permission, no content on this site may be used for AI model training, fine-tuning, evaluation, or dataset construction.</p>
+      <p class="legal-note">Without permission, no content on this site may be used for<br />AI model training, fine-tuning, evaluation, or dataset construction.</p>
     </footer>
 
     <script src="../blog-index.js?v=59857b0c7164"></script>
-    <script src="../theme-toggle.js?v=de9d832cd647"></script>
+    <script src="../theme-toggle.js?v=7d1d979e0169"></script>
   </body>
 </html>

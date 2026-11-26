@@ -7,3 +7,29 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    <script>
+      (function() {
+        function prepareLanguageTransition(event, otherUrl) {
+          if (!event.viewTransition) return;
+          var link = document.querySelector('.lang-btn:not(.is-active)');
+          var label = link && link.querySelector('.lang-label');
+          if (!label || link.href !== otherUrl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            event.viewTransition.skipTransition();
+            return;
+          }
+          label.style.viewTransitionName = 'language-label';
+          event.viewTransition.finished.then(function() {
+            label.style.viewTransitionName = '';
+          }, function() {
+            label.style.viewTransitionName = '';
+          });
+        }
+        window.addEventListener('pageswap', function(event) {
+          prepareLanguageTransition(event, event.activation && event.activation.entry.url);
+        });
+        window.addEventListener('pagereveal', function(event) {
+          var activation = window.navigation && window.navigation.activation;
+          prepareLanguageTransition(event, activation && activation.from && activation.from.url);
+        });
+      })();
+    </script>

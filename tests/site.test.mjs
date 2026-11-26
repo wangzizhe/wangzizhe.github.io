@@ -207,3 +207,41 @@ for (const phase of ['before first character', 'mid-animation', 'after completio
     assert.equal(classes.has('typing'), false);
   });
 }
+
+test('language transitions only animate navigation to the paired translation', async () => {
+  const source = [...read('templates/theme-init.html').matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1)[1];
+  const pairedUrl = 'https://example.com/posts/article-en.html';
+  for (const eventName of ['pageswap', 'pagereveal']) {
+    for (const [otherUrl, reducedMotion, expected] of [
+      [pairedUrl, false, true],
+      ['https://example.com/', false, false],
+      ['https://example.com/posts/another.html', false, false],
+      [undefined, false, false],
+      [pairedUrl, true, false]
+    ]) {
+      const events = {};
+      const label = { style: {} };
+      let finish;
+      let skipped = false;
+      const transition = {
+        finished: new Promise(resolve => { finish = resolve; }),
+        skipTransition() { skipped = true; }
+      };
+      vm.runInNewContext(source, {
+        document: { querySelector: () => ({ href: pairedUrl, querySelector: () => label }) },
+        window: {
+          matchMedia: () => ({ matches: reducedMotion }),
+          navigation: { activation: { from: { url: otherUrl } } },
+          addEventListener(name, handler) { events[name] = handler; }
+        }
+      });
+      events[eventName]({ viewTransition: transition, activation: { entry: { url: otherUrl } } });
+      assert.equal(skipped, !expected, `${eventName}: ${otherUrl}`);
+      assert.equal(label.style.viewTransitionName, expected ? 'language-label' : undefined);
+      finish();
+      await transition.finished;
+      if (expected) assert.equal(label.style.viewTransitionName, '');
+      events[eventName]({}); // Unsupported browsers must keep normal navigation working.
+    }
+  }
+});

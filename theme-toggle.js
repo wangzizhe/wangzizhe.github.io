@@ -19,7 +19,7 @@
     button.addEventListener("click", () => {
       const theme = button.dataset.theme;
       writeSavedTheme(theme);
-      applyTheme(theme);
+      applyTheme(theme, true);
     });
     switcher.append(button);
     return button;
@@ -48,14 +48,31 @@
     return media.matches ? "dark" : "light";
   }
 
-  function applyTheme(theme) {
+  function applyTheme(theme, animate = false) {
     document.documentElement.setAttribute("data-theme", theme);
     const nextTheme = theme === "dark" ? "light" : "dark";
     buttons.forEach((button) => {
       if (button.dataset.theme === nextTheme) return;
+      const previousIcon = animate ? button.querySelector("svg")?.cloneNode(true) : null;
       button.dataset.theme = nextTheme;
       button.setAttribute("aria-label", labels[nextTheme]);
       button.innerHTML = icons[nextTheme];
+      if (previousIcon && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && previousIcon.animate) {
+        const incomingIcon = button.querySelector("svg");
+        previousIcon.classList.add("theme-icon-outgoing");
+        previousIcon.setAttribute("aria-hidden", "true");
+        button.append(previousIcon);
+        const timing = { duration: 200, easing: "ease-out" };
+        incomingIcon.animate([
+          { transform: "translateY(-120%)", opacity: 0 },
+          { transform: "translateY(0)", opacity: 1 }
+        ], timing);
+        const exit = previousIcon.animate([
+          { transform: "translateY(0)", opacity: 1 },
+          { transform: "translateY(120%)", opacity: 0 }
+        ], timing);
+        exit.onfinish = exit.oncancel = () => previousIcon.remove();
+      }
     });
   }
 

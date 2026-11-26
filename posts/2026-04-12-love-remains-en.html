@@ -25,7 +25,7 @@
     <meta name="twitter:description" content="The Last Elder in My Family Is Gone, but the Love Remains" />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The Last Elder in My Family Is Gone, but the Love Remains","description":"The Last Elder in My Family Is Gone, but the Love Remains","datePublished":"2026-04-12","inLanguage":"en","url":"https://wangzizhe.github.io/posts/2026-04-12-love-remains-en.html","author":{"@type":"Person","name":"Wang Zizhe"}}</script>
     <!-- GENERATED:SEO:END -->
-    <link rel="stylesheet" href="../styles.css?v=7ff10660e63e" />
+    <link rel="stylesheet" href="../styles.css?v=c35b90e85965" />
     <script>
       (function() {
         var saved = null;
@@ -33,6 +33,32 @@
         var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var theme = saved === 'dark' || saved === 'light' ? saved : (dark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <script>
+      (function() {
+        function prepareLanguageTransition(event, otherUrl) {
+          if (!event.viewTransition) return;
+          var link = document.querySelector('.lang-btn:not(.is-active)');
+          var label = link && link.querySelector('.lang-label');
+          if (!label || link.href !== otherUrl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            event.viewTransition.skipTransition();
+            return;
+          }
+          label.style.viewTransitionName = 'language-label';
+          event.viewTransition.finished.then(function() {
+            label.style.viewTransitionName = '';
+          }, function() {
+            label.style.viewTransitionName = '';
+          });
+        }
+        window.addEventListener('pageswap', function(event) {
+          prepareLanguageTransition(event, event.activation && event.activation.entry.url);
+        });
+        window.addEventListener('pagereveal', function(event) {
+          var activation = window.navigation && window.navigation.activation;
+          prepareLanguageTransition(event, activation && activation.from && activation.from.url);
+        });
       })();
     </script>
   </head>
@@ -49,8 +75,8 @@
         <div class="nav-right">
           <div class="theme-switch" aria-label="Theme switcher"></div>
           <div class="lang-switch" aria-label="Language switcher">
-            <a class="lang-btn" href="./2026-04-12-love-remains.html">中</a>
-            <a class="lang-btn is-active" href="./2026-04-12-love-remains-en.html" aria-current="page">EN</a>
+            <a class="lang-btn" href="./2026-04-12-love-remains.html"><span class="lang-label">中</span></a>
+            <a class="lang-btn is-active" href="./2026-04-12-love-remains-en.html" aria-current="page"><span class="lang-label">EN</span></a>
           </div>
         </div>
       </nav>
@@ -107,10 +133,10 @@
         </a>
       </div>
       <p lang="en">© 2026 Wang Zizhe. All rights reserved.</p>
-      <p class="legal-note">Without prior written permission, no content on this site may be used for AI model training, fine-tuning, evaluation, or dataset construction.</p>
+      <p class="legal-note">Without permission, no content on this site may be used for<br />AI model training, fine-tuning, evaluation, or dataset construction.</p>
     </footer>
 
     <script src="../post-share.js?v=a34f474e759c"></script>
-    <script src="../theme-toggle.js?v=de9d832cd647"></script>
+    <script src="../theme-toggle.js?v=7d1d979e0169"></script>
   </body>
 </html>

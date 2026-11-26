@@ -25,7 +25,7 @@
     <meta name="twitter:description" content="Wang Zizhe 的个人博客，记录创业思考与生活观察。" />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Wang Zizhe | 个人博客","url":"https://wangzizhe.github.io/","inLanguage":"zh-CN"}</script>
     <!-- GENERATED:SEO:END -->
-    <link rel="stylesheet" href="styles.css?v=7ff10660e63e" />
+    <link rel="stylesheet" href="styles.css?v=c35b90e85965" />
     <script>
       (function() {
         var saved = null;
@@ -35,6 +35,32 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
+    <script>
+      (function() {
+        function prepareLanguageTransition(event, otherUrl) {
+          if (!event.viewTransition) return;
+          var link = document.querySelector('.lang-btn:not(.is-active)');
+          var label = link && link.querySelector('.lang-label');
+          if (!label || link.href !== otherUrl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            event.viewTransition.skipTransition();
+            return;
+          }
+          label.style.viewTransitionName = 'language-label';
+          event.viewTransition.finished.then(function() {
+            label.style.viewTransitionName = '';
+          }, function() {
+            label.style.viewTransitionName = '';
+          });
+        }
+        window.addEventListener('pageswap', function(event) {
+          prepareLanguageTransition(event, event.activation && event.activation.entry.url);
+        });
+        window.addEventListener('pagereveal', function(event) {
+          var activation = window.navigation && window.navigation.activation;
+          prepareLanguageTransition(event, activation && activation.from && activation.from.url);
+        });
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -42,8 +68,8 @@
         <div class="nav-right">
           <div class="theme-switch" aria-label="Theme switcher"></div>
           <div class="lang-switch" aria-label="Language switcher">
-            <a class="lang-btn is-active" href="./" aria-current="page">中</a>
-            <a class="lang-btn" href="en/">EN</a>
+            <a class="lang-btn is-active" href="./" aria-current="page"><span class="lang-label">中</span></a>
+            <a class="lang-btn" href="en/"><span class="lang-label">EN</span></a>
           </div>
         </div>
       </nav>
@@ -59,6 +85,12 @@
     <main>
       <section id="posts">
         <div class="post-grid">
+          <article class="post-card">
+            <time class="meta" datetime="2026-11-22">2026-11-22</time>
+            <h2>我们常常搞错了什么才是真正的风险</h2>
+            <p>我们常常高估不确定性带来的风险，却低估了不去尝试的代价。真正的风险不是失败，而是多年以后回望今天，后悔自己从未真正尝试过。</p>
+            <a class="post-card-link" href="posts/2026-11-22-what-we-get-wrong-about-risk.html" aria-label="继续阅读：我们常常搞错了什么才是真正的风险"><span class="post-card-link-text">继续阅读</span></a>
+          </article>
           <article class="post-card">
             <time class="meta" datetime="2026-11-12">2026-11-12</time>
             <h2>缅怀老黄</h2>
@@ -226,7 +258,7 @@
           <article class="post-card">
             <time class="meta" datetime="2026-02-07">2026-02-07</time>
             <h2>对于不确定性的理解</h2>
-            <p>对我而言，稳定并不等于安全，追求确定性反而可能加速失去竞争力和选择权。我越来越确信，不确定性中蕴藏着巨大的机会，所以我选择拥抱它。</p>
+            <p>对我而言，稳定 ≠ 安全，追求确定性反而会让我失去竞争力和选择权。我坚信，不确定性中蕴藏着巨大的机会，因此我选择主动拥抱它。</p>
             <a class="post-card-link" href="posts/2026-02-07-understanding-uncertainty.html" aria-label="继续阅读：对于不确定性的理解"><span class="post-card-link-text">继续阅读</span></a>
           </article>
           <article class="post-card">
@@ -248,10 +280,10 @@
         </a>
       </div>
       <p lang="en">© 2026 Wang Zizhe. All rights reserved.</p>
-      <p class="legal-note">未经书面授权，禁止将本站任何内容<br />用于人工智能模型训练、微调、评测或数据集构建。</p>
+      <p class="legal-note">未经授权，禁止将本站任何内容<br />用于人工智能模型训练、微调、评测或数据集构建。</p>
     </footer>
 
     <script src="blog-index.js?v=59857b0c7164"></script>
-    <script src="theme-toggle.js?v=de9d832cd647"></script>
+    <script src="theme-toggle.js?v=7d1d979e0169"></script>
   </body>
 </html>

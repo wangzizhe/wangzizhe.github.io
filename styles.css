@@ -166,7 +166,7 @@ main,
   padding: 0;
   border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.18s ease, color 0.18s ease;
+  transition: background-color 0.12s ease, color 0.12s ease;
 }
 
 .lang-btn {
@@ -175,6 +175,8 @@ main,
 }
 
 .theme-btn {
+  position: relative;
+  overflow: hidden;
   color: var(--theme-icon-color);
 }
 
@@ -189,8 +191,51 @@ main,
   height: 1rem;
 }
 
+.theme-btn .theme-icon-outgoing {
+  position: absolute;
+  pointer-events: none;
+}
+
 .lang-switch .lang-btn.is-active {
   display: none;
+}
+
+.lang-label {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  :root {
+    view-transition-name: none;
+  }
+
+  ::view-transition-group(language-label) {
+    animation-duration: 200ms;
+    overflow: clip;
+  }
+
+  ::view-transition-old(language-label) {
+    animation: control-slide-out 200ms ease-out both;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-new(language-label) {
+    animation: control-slide-in 200ms ease-out both;
+    mix-blend-mode: normal;
+  }
+}
+
+@keyframes control-slide-out {
+  to { transform: translateY(120%); opacity: 0; }
+}
+
+@keyframes control-slide-in {
+  from { transform: translateY(-120%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .hero {
@@ -332,11 +377,16 @@ html[lang="en"] .hero-text {
   color: var(--footer-text);
   font-family: var(--system-font), "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   font-size: 0.9rem;
+  line-height: 1.5rem;
   text-align: center;
 }
 
 .site-footer p {
   margin: 0;
+}
+
+html[lang="zh-CN"] .site-footer .legal-note {
+  font-size: 0.84rem;
 }
 
 .footer-socials {

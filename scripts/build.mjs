@@ -122,8 +122,8 @@ function sharedValues(lang, prefix) {
     ZH_CURRENT: english ? "" : ' aria-current="page"',
     EN_CURRENT: english ? ' aria-current="page"' : "",
     FOOTER_NOTICE: english
-      ? "Without prior written permission, no content on this site may be used for AI model training, fine-tuning, evaluation, or dataset construction."
-      : "未经书面授权，禁止将本站任何内容<br />用于人工智能模型训练、微调、评测或数据集构建。"
+      ? "Without permission, no content on this site may be used for<br />AI model training, fine-tuning, evaluation, or dataset construction."
+      : "未经授权，禁止将本站任何内容<br />用于人工智能模型训练、微调、评测或数据集构建。"
   };
   return {
     ...values,

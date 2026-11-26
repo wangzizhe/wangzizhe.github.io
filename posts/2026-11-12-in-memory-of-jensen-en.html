@@ -25,7 +25,7 @@
     <meta name="twitter:description" content="In Memory of Jensen" />
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"In Memory of Jensen","description":"In Memory of Jensen","datePublished":"2026-11-12","inLanguage":"en","url":"https://wangzizhe.github.io/posts/2026-11-12-in-memory-of-jensen-en.html","author":{"@type":"Person","name":"Wang Zizhe"}}</script>
     <!-- GENERATED:SEO:END -->
-    <link rel="stylesheet" href="../styles.css?v=7ff10660e63e" />
+    <link rel="stylesheet" href="../styles.css?v=c35b90e85965" />
     <script>
       (function() {
         var saved = null;
@@ -33,6 +33,32 @@
         var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         var theme = saved === 'dark' || saved === 'light' ? saved : (dark ? 'dark' : 'light');
         document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <script>
+      (function() {
+        function prepareLanguageTransition(event, otherUrl) {
+          if (!event.viewTransition) return;
+          var link = document.querySelector('.lang-btn:not(.is-active)');
+          var label = link && link.querySelector('.lang-label');
+          if (!label || link.href !== otherUrl || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            event.viewTransition.skipTransition();
+            return;
+          }
+          label.style.viewTransitionName = 'language-label';
+          event.viewTransition.finished.then(function() {
+            label.style.viewTransitionName = '';
+          }, function() {
+            label.style.viewTransitionName = '';
+          });
+        }
+        window.addEventListener('pageswap', function(event) {
+          prepareLanguageTransition(event, event.activation && event.activation.entry.url);
+        });
+        window.addEventListener('pagereveal', function(event) {
+          var activation = window.navigation && window.navigation.activation;
+          prepareLanguageTransition(event, activation && activation.from && activation.from.url);
+        });
       })();
     </script>
   </head>
@@ -49,8 +75,8 @@
         <div class="nav-right">
           <div class="theme-switch" aria-label="Theme switcher"></div>
           <div class="lang-switch" aria-label="Language switcher">
-            <a class="lang-btn" href="./2026-11-12-in-memory-of-jensen.html">中</a>
-            <a class="lang-btn is-active" href="./2026-11-12-in-memory-of-jensen-en.html" aria-current="page">EN</a>
+            <a class="lang-btn" href="./2026-11-12-in-memory-of-jensen.html"><span class="lang-label">中</span></a>
+            <a class="lang-btn is-active" href="./2026-11-12-in-memory-of-jensen-en.html" aria-current="page"><span class="lang-label">EN</span></a>
           </div>
         </div>
       </nav>
@@ -61,9 +87,9 @@
       <article class="post-article">
         <p>Deep learning has been around for about 40 years, but for a long time, it was a very niche field. Computer science students might have learned about it in class, but it was such a minor topic that professors rarely spent much time on it. Everything changed in 2012, when AlexNet, trained on GPUs, shocked the world with its performance in the ImageNet competition. That marked the beginning of the deep learning era. Then came the boom in computer vision, Transformers, large language models, and the generative AI revolution we're seeing today. Without CUDA, it's hard to imagine any of this happening, let alone the incredible AI revolution we're living through. And without Jensen's persistence, CUDA might never have existed, and neither would much of what we see today.</p>
 
-        <p>Today, training large AI models has largely become a race for computing power. The more computing power you have, the better your chances of leading in AI. In a sense, Jensen didn't just build NVIDIA into a great company. He also helped drive the deep learning revolution and played a major role in making America the world's leader in AI.</p>
+        <p>Today, training large language models has largely become a race for computing power. The more computing power you have, the better your chances of leading in AI. In a sense, Jensen didn't just build NVIDIA into a great company. He also helped drive the deep learning revolution and played a major role in making the US the world's leader in AI.</p>
 
-        <p>And yet, at a time like this, one shocking accusation after another has emerged, with seemingly no solid evidence to support them. I can't help but wonder if Jensen has become a victim of political infighting. I even suspect that some kind of deal may have been made. If he hadn't admitted to anything or stepped down, perhaps more accusations would have followed until he finally gave in. The board was in a difficult position. Supporting him could have put the entire company at greater risk, but letting him go meant losing the heart and soul of NVIDIA. In the end, it seems there was no other choice but for Jensen to become a victim of this political battle.</p>
+        <p>And yet, at a time like this, one shocking accusation after another has come out, without any solid evidence to back them up. I can't help but wonder if Jensen has become a victim of political infighting. I even suspect that some kind of deal may have been made. If he hadn't admitted to anything or stepped down, perhaps more accusations would have followed until he finally gave in. The board was in a difficult position. Supporting him could have put the entire company at greater risk, but letting him go meant losing the heart and soul of NVIDIA. In the end, it seems Jensen was left with no choice but to sacrifice himself in this political battle.</p>
 
         <p>Tragic!</p>
         <section class="share-section" aria-label="Share this article"></section>
@@ -79,10 +105,10 @@
         </a>
       </div>
       <p lang="en">© 2026 Wang Zizhe. All rights reserved.</p>
-      <p class="legal-note">Without prior written permission, no content on this site may be used for AI model training, fine-tuning, evaluation, or dataset construction.</p>
+      <p class="legal-note">Without permission, no content on this site may be used for<br />AI model training, fine-tuning, evaluation, or dataset construction.</p>
     </footer>
 
     <script src="../post-share.js?v=a34f474e759c"></script>
-    <script src="../theme-toggle.js?v=de9d832cd647"></script>
+    <script src="../theme-toggle.js?v=7d1d979e0169"></script>
   </body>
 </html>
