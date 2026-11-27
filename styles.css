@@ -370,6 +370,7 @@ html[lang="en"] .hero-text {
 
 .post-card p {
   margin: 0.45rem 0 0;
+  color: light-dark(#373b3e, color-mix(in srgb, var(--text) 50%, var(--muted)));
 }
 
 .site-footer {

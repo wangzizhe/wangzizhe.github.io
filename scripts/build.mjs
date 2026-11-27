@@ -76,6 +76,16 @@ function validatePosts(posts) {
         errors.push(`duplicate href: ${localized.href}`);
       }
       hrefs.add(localized.href);
+      if (Object.hasOwn(localized, "previousHref")) {
+        const previous = localized.previousHref;
+        if (typeof previous !== "string" || !/^posts\/[a-z0-9-]+\.html$/.test(previous)) {
+          errors.push(`post ${index + 1}: invalid ${lang} previous article path`);
+        } else if (hrefs.has(previous)) {
+          errors.push(`duplicate href: ${previous}`);
+        } else {
+          hrefs.add(previous);
+        }
+      }
       if (!fs.existsSync(path.join(root, "content", localized.href))) {
         errors.push(`missing article source: content/${localized.href}`);
       }
@@ -279,8 +289,22 @@ function expectedFiles(posts) {
 
   for (const post of posts) {
     for (const lang of ["zh", "en"]) {
-      const file = post[lang].href;
+      const { href: file, previousHref, title } = post[lang];
       files.set(file, renderArticlePage(articleTemplate, post, lang));
+      if (previousHref) {
+        const target = `./${path.basename(file)}`;
+        files.set(previousHref, `<!doctype html>
+<html lang="${lang === "zh" ? "zh-CN" : "en"}">
+  <head>
+    <meta charset="UTF-8" />
+    <title>${escapeHtml(title)}</title>
+    <link rel="canonical" href="${siteUrl}/${file}" />
+    <meta http-equiv="refresh" content="0; url=${target}" />
+  </head>
+  <body><a href="${target}">${escapeHtml(title)}</a></body>
+</html>
+`);
+      }
     }
   }
 

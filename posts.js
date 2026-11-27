@@ -2,24 +2,41 @@ window.BLOG_POSTS = [
   {
     date: "2026-11-22",
     zh: {
+      title: "四周，四个投资人",
+      summary: "一个月的交流，一些过去没想过的问题，一些必要的苦恼，以及逐渐清晰的思路。",
+      href: "posts/2026-11-22-four-weeks-four-investors.html"
+    },
+    en: {
+      title: "Four Weeks, Four Investors",
+      summary: "A month of conversations, questions I had never considered, some necessary discomfort, and a growing sense of clarity.",
+      href: "posts/2026-11-22-four-weeks-four-investors-en.html"
+    }
+  },
+  {
+    date: "2026-11-15",
+    zh: {
       title: "我们常常搞错了什么才是真正的风险",
       summary: "我们常常高估不确定性带来的风险，却低估了不去尝试的代价。真正的风险不是失败，而是多年以后回望今天，后悔自己从未真正尝试过。",
-      href: "posts/2026-11-22-what-we-get-wrong-about-risk.html"
+      href: "posts/2026-11-15-what-we-get-wrong-about-risk.html",
+      previousHref: "posts/2026-11-22-what-we-get-wrong-about-risk.html"
     },
     en: {
       title: "What We Get Wrong About Risk",
       summary: "We often overestimate the risks of uncertainty and underestimate the cost of not trying. The real risk is not failing, but looking back years later and regretting that we never really tried.",
-      href: "posts/2026-11-22-what-we-get-wrong-about-risk-en.html"
+      href: "posts/2026-11-15-what-we-get-wrong-about-risk-en.html",
+      previousHref: "posts/2026-11-22-what-we-get-wrong-about-risk-en.html"
     }
   },
   {
     date: "2026-11-12",
     zh: {
       title: "缅怀老黄",
+      summary: "从 CUDA 到今天的 AI 浪潮，一个人的坚持改变了整个行业。而历史的走向，有时却令人唏嘘。",
       href: "posts/2026-11-12-in-memory-of-jensen.html"
     },
     en: {
       title: "In Memory of Jensen",
+      summary: "From CUDA to today's AI revolution, one man's persistence changed an entire industry. Yet history sometimes takes a tragic turn.",
       href: "posts/2026-11-12-in-memory-of-jensen-en.html"
     }
   },
@@ -27,10 +44,12 @@ window.BLOG_POSTS = [
     date: "2026-11-01",
     zh: {
       title: "我发现自己还不够疯狂，想得还不够大",
+      summary: "两周，十份申请，一次思维方式的转变，以及一个值得为之奋斗十年的目标。",
       href: "posts/2026-11-01-thinking-big-and-bold.html"
     },
     en: {
       title: "I Realized I Haven't Been Thinking Big or Bold Enough",
+      summary: "Two weeks, ten applications, a shift in mindset, and a goal worth pursuing for the next decade.",
       href: "posts/2026-11-01-thinking-big-and-bold-en.html"
     }
   },
@@ -38,10 +57,12 @@ window.BLOG_POSTS = [
     date: "2026-10-25",
     zh: {
       title: "Computer 曾经是人，Programmer 呢？",
+      summary: "从计算员到程序员，熟悉的故事在技术史上反复上演。",
       href: "posts/2026-10-25-computers-were-once-human.html"
     },
     en: {
       title: "Computers Were Once Human. What About Programmers?",
+      summary: "From human computers to programmers, a familiar story repeats itself throughout the history of technology.",
       href: "posts/2026-10-25-computers-were-once-human-en.html"
     }
   },
